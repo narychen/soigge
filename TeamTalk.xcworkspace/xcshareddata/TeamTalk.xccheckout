@@ -10,31 +10,31 @@
 	<string>TeamTalk</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>438AB9C685D2126C067FC6E0A59E9C7C05914A28</key>
-		<string>http://gitlab.mogujie.org/im/ttopen.git</string>
+		<key>A55E4C2D2B6759293866CF83721B496EFE32E4E6</key>
+		<string>github.com:narychen/soigge.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ios/TeamTalk.xcworkspace</string>
+	<string>TeamTalk.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>438AB9C685D2126C067FC6E0A59E9C7C05914A28</key>
-		<string>../..</string>
+		<key>A55E4C2D2B6759293866CF83721B496EFE32E4E6</key>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>http://gitlab.mogujie.org/im/ttopen.git</string>
+	<string>github.com:narychen/soigge.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>438AB9C685D2126C067FC6E0A59E9C7C05914A28</string>
+	<string>A55E4C2D2B6759293866CF83721B496EFE32E4E6</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>438AB9C685D2126C067FC6E0A59E9C7C05914A28</string>
+			<string>A55E4C2D2B6759293866CF83721B496EFE32E4E6</string>
 			<key>IDESourceControlWCCName</key>
-			<string>ttopen</string>
+			<string>soigge</string>
 		</dict>
 	</array>
 </dict>
