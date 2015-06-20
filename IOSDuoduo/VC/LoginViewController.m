@@ -68,7 +68,8 @@
     
     
     
-    self.defaultCenter=self.view.center;
+//    self.defaultCenter=self.view.center; //Don't put it here cuz it will be different on iphone6+
+    
     self.userNameTextField.leftViewMode=UITextFieldViewModeAlways;
     self.userPassTextField.leftViewMode=UITextFieldViewModeAlways;
     UIImageView *usernameLeftView = [[UIImageView alloc] init];
@@ -100,8 +101,7 @@
                                              selector:@selector(handleWillHideKeyboard)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    
-    
+
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
@@ -109,20 +109,27 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.defaultCenter=self.view.center;
     
 }
 -(void)handleWillShowKeyboard
 {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.view.center=CGPointMake(self.view.center.x, self.defaultCenter.y-(IPHONE4?120:40));
-    }];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    self.view.center=CGPointMake(self.view.center.x, self.defaultCenter.y-(IPHONE4?120:40));
+    [UIView commitAnimations];
 }
+
 -(void)handleWillHideKeyboard
 {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.view.center=self.defaultCenter;
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.4 animations:^{
+            self.view.center=self.defaultCenter;
+        }];
+    });
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
