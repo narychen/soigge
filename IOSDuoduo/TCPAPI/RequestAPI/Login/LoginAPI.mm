@@ -116,6 +116,8 @@
         IMLoginReqBuilder *login = [IMLoginReq builder];
         [login setUserName:object[0]];
         [login setPassword:[strMsg MD5]];
+        NSString* md5passwd = [login password];
+        DDLog(@"md5 password is %@", md5passwd);
         [login setClientType:ClientTypeClientTypeIos];
         [login setClientVersion:clientVersion];
         [login setOnlineStatus:UserStatTypeUserStatusOnline];

@@ -67,6 +67,7 @@
 
     [_httpServer getMsgIp:^(NSDictionary *dic) {
         NSInteger code  = [[dic objectForKey:@"code"] integerValue];
+        NSString* msg = [dic objectForKey:@"msg"];
         if (code == 0) {
             _priorIP = [dic objectForKey:@"priorIP"];
             _port    =  [[dic objectForKey:@"port"] integerValue];
@@ -94,14 +95,17 @@
                      [DDNotificationHelp postNotification:DDNotificationUserLoginSuccess userInfo:nil object:user];
                 } failure:^(id object) {
                     DDLog(@"login#登录验证失败");
-                    
                     failure(@"登录验证失败");
                 }];
                 
             } failure:^{
-                 DDLog(@"连接消息服务器失败");
-                  failure(@"连接消息服务器失败");
+                DDLog(@"连接消息服务器失败");
+                failure(@"连接消息服务器失败");
             }];
+        }else if(code == 1){
+//            failure(@"xxxxx连接消息服务器失败");
+            DDLog(@"%@", msg);
+            failure(msg);
         }
     } failure:^(NSString *error) {
          failure(@"获取消息服务器地址失败");
