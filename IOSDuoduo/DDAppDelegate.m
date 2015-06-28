@@ -21,7 +21,7 @@
 #import "SessionEntity.h"
 #import "MainViewControll.h"
 #import "DDMessageModule.h"
-#import "MobClick.h"
+//#import "MobClick.h"
 #import "LoginModule.h"
 #import "DDTcpClientManager.h"
 #import "SessionModule.h"

@@ -14,8 +14,10 @@
 @property (weak)IBOutlet UIImageView *landspace;
 @property (nonatomic,weak)IBOutlet UITextField* userPassTextField;
 @property (nonatomic,weak)IBOutlet UIButton* userLoginBtn;
+@property (weak, nonatomic) IBOutlet UIButton *userRegisterBtn;
 @property(assign)BOOL isRelogin;
 - (IBAction)login:(UIButton*)button;
 -(IBAction)hiddenKeyboard:(id)sender;
 -(IBAction)showEditServerAddress:(id)sender;
+- (IBAction)registerUser:(UIButton *)sender;
 @end

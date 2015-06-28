@@ -88,7 +88,8 @@
     [self.userPassTextField.layer setBorderWidth:0.5];
     [self.userPassTextField.layer setCornerRadius:4];
     
-    [self.userLoginBtn.layer setCornerRadius:4];
+    [self.userLoginBtn.layer setCornerRadius:8];
+    [_userRegisterBtn.layer setCornerRadius:8];
     
     // 设置用户名
     
@@ -146,8 +147,8 @@
 {
     
     [self.userLoginBtn setEnabled:NO];
-    NSString* userName = _userNameTextField.text ;
-    NSString* password = _userPassTextField.text ;
+    NSString* userName = _userNameTextField.text;
+    NSString* password = _userPassTextField.text;
     if (userName.length ==0 || password.length == 0) {
         [self.userLoginBtn setEnabled:YES];
         return;
@@ -210,5 +211,22 @@
         [defaults setObject:addressField.text forKey:@"ipaddress"];
     }];
     [alert showEdit:self title:@"编辑服务器地址" subTitle:@"请填写你的服务器地址，或使用我们的测试服务器" closeButtonTitle:@"关闭" duration:0];
+}
+
+
+- (IBAction)registerUser:(UIButton *)sender{
+    [self.userRegisterBtn setEnabled:NO];
+    NSString* userName = _userNameTextField.text;
+    NSString* password = _userPassTextField.text;
+    if (userName.length ==0 || password.length == 0) {
+        [self.userRegisterBtn setEnabled:YES];
+        return;
+    }
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    [HUD show:YES];
+    HUD.dimBackground = YES;
+    HUD.labelText = @"正在注册";
+    [self.userRegisterBtn setEnabled:YES];
 }
 @end

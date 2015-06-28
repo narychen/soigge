@@ -11,6 +11,7 @@
                 <outlet property="userLoginBtn" destination="zO8-09-BqU" id="5Be-ns-gUY"/>
                 <outlet property="userNameTextField" destination="OJa-cj-8se" id="1XV-fF-h8m"/>
                 <outlet property="userPassTextField" destination="qzu-xr-nVp" id="XSY-7q-dvh"/>
+                <outlet property="userRegisterBtn" destination="ClC-lq-Moq" id="0Ea-zB-BQ7"/>
                 <outlet property="view" destination="1" id="gNJ-Yv-nix"/>
             </connections>
         </placeholder>
@@ -54,11 +55,11 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zO8-09-BqU">
-                    <rect key="frame" x="15" y="375" width="290" height="30"/>
+                    <rect key="frame" x="15" y="375" width="137" height="30"/>
                     <color key="backgroundColor" red="0.0039215686274509803" green="0.68627450980392157" blue="0.95686274509803915" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="7dc-yM-mmA"/>
-                        <constraint firstAttribute="width" constant="290" id="vaV-E1-PGB"/>
+                        <constraint firstAttribute="width" constant="137" id="vaV-E1-PGB"/>
                     </constraints>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <state key="normal" title="登录">
@@ -66,7 +67,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="login:" destination="-1" eventType="touchUpInside" id="tQ2-wB-2ZA"/>
+                        <action selector="login:" destination="-1" eventType="touchUpInside" id="LH2-KT-DR5"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2E-t6-ssK">
@@ -94,18 +95,35 @@
                         </mask>
                     </variation>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClC-lq-Moq">
+                    <rect key="frame" x="160" y="375" width="145" height="30"/>
+                    <color key="backgroundColor" red="0.0039215686269999999" green="0.68627450980000004" blue="0.95686274510000002" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="145" id="LPq-Zl-yEn"/>
+                        <constraint firstAttribute="height" constant="30" id="zD2-ga-OUa"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="注册">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="registerUser:" destination="-1" eventType="touchUpInside" id="Gye-9B-Trc"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="cui-GK-nTH" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="3GV-TX-cBk"/>
                 <constraint firstItem="d2E-t6-ssK" firstAttribute="top" secondItem="cui-GK-nTH" secondAttribute="bottom" constant="-46" id="45q-vP-rrS"/>
                 <constraint firstAttribute="bottom" secondItem="zO8-09-BqU" secondAttribute="bottom" constant="54" id="7KL-54-Ome"/>
-                <constraint firstAttribute="centerX" secondItem="zO8-09-BqU" secondAttribute="centerX" id="Buy-vD-xck"/>
+                <constraint firstAttribute="centerX" secondItem="zO8-09-BqU" secondAttribute="centerX" constant="76.5" id="Buy-vD-xck"/>
                 <constraint firstItem="OJa-cj-8se" firstAttribute="top" secondItem="1na-rl-GvH" secondAttribute="bottom" constant="50" id="DM3-Lr-f6i"/>
                 <constraint firstAttribute="centerX" secondItem="qzu-xr-nVp" secondAttribute="centerX" id="IQJ-Nl-gDL"/>
                 <constraint firstAttribute="bottom" secondItem="cui-GK-nTH" secondAttribute="bottom" id="Mqk-KD-Nrc"/>
                 <constraint firstItem="qzu-xr-nVp" firstAttribute="top" secondItem="OJa-cj-8se" secondAttribute="bottom" constant="15" id="NVG-Sh-S9C"/>
                 <constraint firstAttribute="centerX" secondItem="OJa-cj-8se" secondAttribute="centerX" id="RuG-ph-rfg"/>
+                <constraint firstItem="ClC-lq-Moq" firstAttribute="top" secondItem="qzu-xr-nVp" secondAttribute="bottom" constant="20" id="WJc-b7-M5H"/>
                 <constraint firstItem="zO8-09-BqU" firstAttribute="top" secondItem="qzu-xr-nVp" secondAttribute="bottom" constant="20" id="cgj-Fr-nR1"/>
                 <constraint firstAttribute="centerX" secondItem="d2E-t6-ssK" secondAttribute="centerX" id="dtQ-YO-zzt"/>
                 <constraint firstAttribute="centerX" secondItem="1na-rl-GvH" secondAttribute="centerX" id="fJi-M1-7Jk"/>
@@ -114,6 +132,7 @@
                 <constraint firstItem="cui-GK-nTH" firstAttribute="top" secondItem="1" secondAttribute="top" constant="-72" id="j5N-Aq-5yE"/>
                 <constraint firstItem="zO8-09-BqU" firstAttribute="top" secondItem="qzu-xr-nVp" secondAttribute="bottom" constant="20" id="rU6-q8-HfE"/>
                 <constraint firstItem="OJa-cj-8se" firstAttribute="top" secondItem="1na-rl-GvH" secondAttribute="bottom" constant="50" id="wTB-EF-V5O"/>
+                <constraint firstItem="ClC-lq-Moq" firstAttribute="leading" secondItem="zO8-09-BqU" secondAttribute="trailing" constant="8" id="xbN-s4-lZL"/>
                 <constraint firstItem="1na-rl-GvH" firstAttribute="top" secondItem="1" secondAttribute="top" constant="100" id="yhl-vh-kvX"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -125,7 +144,7 @@
                     <exclude reference="rU6-q8-HfE"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="171" y="235"/>
+            <point key="canvasLocation" x="266" y="254"/>
         </view>
     </objects>
     <resources>
