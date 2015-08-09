@@ -100,7 +100,7 @@
 #define COCOAPODS_POD_AVAILABLE_ProtocolBuffers
 #define COCOAPODS_VERSION_MAJOR_ProtocolBuffers 1
 #define COCOAPODS_VERSION_MINOR_ProtocolBuffers 9
-#define COCOAPODS_VERSION_PATCH_ProtocolBuffers 3
+#define COCOAPODS_VERSION_PATCH_ProtocolBuffers 8
 
 // SCLAlertView-Objective-C
 #define COCOAPODS_POD_AVAILABLE_SCLAlertView_Objective_C

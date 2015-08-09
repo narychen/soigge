@@ -26,9 +26,7 @@ static PBExtensionRegistry* extensionRegistry = nil;
 
 @implementation IMMsgServReq
 
-- (void) dealloc {
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
   }
   return self;
@@ -39,10 +37,10 @@ static IMMsgServReq* defaultIMMsgServReqInstance = nil;
     defaultIMMsgServReqInstance = [[IMMsgServReq alloc] init];
   }
 }
-+ (IMMsgServReq*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMMsgServReqInstance;
 }
-- (IMMsgServReq*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMMsgServReqInstance;
 }
 - (BOOL) isInitialized {
@@ -95,6 +93,9 @@ static IMMsgServReq* defaultIMMsgServReqInstance = nil;
 - (void) writeDescriptionTo:(NSMutableString*) output withIndent:(NSString*) indent {
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  [self.unknownFields storeInDictionary:dictionary];
+}
 - (BOOL) isEqual:(id)other {
   if (other == self) {
     return YES;
@@ -114,29 +115,26 @@ static IMMsgServReq* defaultIMMsgServReqInstance = nil;
 @end
 
 @interface IMMsgServReqBuilder()
-@property (strong) IMMsgServReq* result;
+@property (strong) IMMsgServReq* resultImmsgServReq;
 @end
 
 @implementation IMMsgServReqBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImmsgServReq;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMMsgServReq alloc] init];
+    self.resultImmsgServReq = [[IMMsgServReq alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImmsgServReq;
 }
 - (IMMsgServReqBuilder*) clear {
-  self.result = [[IMMsgServReq alloc] init];
+  self.resultImmsgServReq = [[IMMsgServReq alloc] init];
   return self;
 }
 - (IMMsgServReqBuilder*) clone {
-  return [IMMsgServReq builderWithPrototype:result];
+  return [IMMsgServReq builderWithPrototype:resultImmsgServReq];
 }
 - (IMMsgServReq*) defaultInstance {
   return [IMMsgServReq defaultInstance];
@@ -146,8 +144,8 @@ static IMMsgServReq* defaultIMMsgServReqInstance = nil;
   return [self buildPartial];
 }
 - (IMMsgServReq*) buildPartial {
-  IMMsgServReq* returnMe = result;
-  self.result = nil;
+  IMMsgServReq* returnMe = resultImmsgServReq;
+  self.resultImmsgServReq = nil;
   return returnMe;
 }
 - (IMMsgServReqBuilder*) mergeFrom:(IMMsgServReq*) other {
@@ -192,36 +190,32 @@ static IMMsgServReq* defaultIMMsgServReqInstance = nil;
 - (BOOL) hasResultCode {
   return !!hasResultCode_;
 }
-- (void) setHasResultCode:(BOOL) value_ {
-  hasResultCode_ = !!value_;
+- (void) setHasResultCode:(BOOL) _value_ {
+  hasResultCode_ = !!_value_;
 }
 @synthesize resultCode;
 - (BOOL) hasPriorIp {
   return !!hasPriorIp_;
 }
-- (void) setHasPriorIp:(BOOL) value_ {
-  hasPriorIp_ = !!value_;
+- (void) setHasPriorIp:(BOOL) _value_ {
+  hasPriorIp_ = !!_value_;
 }
 @synthesize priorIp;
 - (BOOL) hasBackipIp {
   return !!hasBackipIp_;
 }
-- (void) setHasBackipIp:(BOOL) value_ {
-  hasBackipIp_ = !!value_;
+- (void) setHasBackipIp:(BOOL) _value_ {
+  hasBackipIp_ = !!_value_;
 }
 @synthesize backipIp;
 - (BOOL) hasPort {
   return !!hasPort_;
 }
-- (void) setHasPort:(BOOL) value_ {
-  hasPort_ = !!value_;
+- (void) setHasPort:(BOOL) _value_ {
+  hasPort_ = !!_value_;
 }
 @synthesize port;
-- (void) dealloc {
-  self.priorIp = nil;
-  self.backipIp = nil;
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.resultCode = ResultTypeRefuseReasonNone;
     self.priorIp = @"";
@@ -236,10 +230,10 @@ static IMMsgServRsp* defaultIMMsgServRspInstance = nil;
     defaultIMMsgServRspInstance = [[IMMsgServRsp alloc] init];
   }
 }
-+ (IMMsgServRsp*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMMsgServRspInstance;
 }
-- (IMMsgServRsp*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMMsgServRspInstance;
 }
 - (BOOL) isInitialized {
@@ -318,7 +312,7 @@ static IMMsgServRsp* defaultIMMsgServRspInstance = nil;
 }
 - (void) writeDescriptionTo:(NSMutableString*) output withIndent:(NSString*) indent {
   if (self.hasResultCode) {
-    [output appendFormat:@"%@%@: %d\n", indent, @"resultCode", self.resultCode];
+    [output appendFormat:@"%@%@: %@\n", indent, @"resultCode", NSStringFromResultType(self.resultCode)];
   }
   if (self.hasPriorIp) {
     [output appendFormat:@"%@%@: %@\n", indent, @"priorIp", self.priorIp];
@@ -330,6 +324,21 @@ static IMMsgServRsp* defaultIMMsgServRspInstance = nil;
     [output appendFormat:@"%@%@: %@\n", indent, @"port", [NSNumber numberWithInteger:self.port]];
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
+}
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasResultCode) {
+    [dictionary setObject: @(self.resultCode) forKey: @"resultCode"];
+  }
+  if (self.hasPriorIp) {
+    [dictionary setObject: self.priorIp forKey: @"priorIp"];
+  }
+  if (self.hasBackipIp) {
+    [dictionary setObject: self.backipIp forKey: @"backipIp"];
+  }
+  if (self.hasPort) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.port] forKey: @"port"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
 }
 - (BOOL) isEqual:(id)other {
   if (other == self) {
@@ -370,29 +379,26 @@ static IMMsgServRsp* defaultIMMsgServRspInstance = nil;
 @end
 
 @interface IMMsgServRspBuilder()
-@property (strong) IMMsgServRsp* result;
+@property (strong) IMMsgServRsp* resultImmsgServRsp;
 @end
 
 @implementation IMMsgServRspBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImmsgServRsp;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMMsgServRsp alloc] init];
+    self.resultImmsgServRsp = [[IMMsgServRsp alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImmsgServRsp;
 }
 - (IMMsgServRspBuilder*) clear {
-  self.result = [[IMMsgServRsp alloc] init];
+  self.resultImmsgServRsp = [[IMMsgServRsp alloc] init];
   return self;
 }
 - (IMMsgServRspBuilder*) clone {
-  return [IMMsgServRsp builderWithPrototype:result];
+  return [IMMsgServRsp builderWithPrototype:resultImmsgServRsp];
 }
 - (IMMsgServRsp*) defaultInstance {
   return [IMMsgServRsp defaultInstance];
@@ -402,8 +408,8 @@ static IMMsgServRsp* defaultIMMsgServRspInstance = nil;
   return [self buildPartial];
 }
 - (IMMsgServRsp*) buildPartial {
-  IMMsgServRsp* returnMe = result;
-  self.result = nil;
+  IMMsgServRsp* returnMe = resultImmsgServRsp;
+  self.resultImmsgServRsp = nil;
   return returnMe;
 }
 - (IMMsgServRspBuilder*) mergeFrom:(IMMsgServRsp*) other {
@@ -468,67 +474,67 @@ static IMMsgServRsp* defaultIMMsgServRspInstance = nil;
   }
 }
 - (BOOL) hasResultCode {
-  return result.hasResultCode;
+  return resultImmsgServRsp.hasResultCode;
 }
 - (ResultType) resultCode {
-  return result.resultCode;
+  return resultImmsgServRsp.resultCode;
 }
 - (IMMsgServRspBuilder*) setResultCode:(ResultType) value {
-  result.hasResultCode = YES;
-  result.resultCode = value;
+  resultImmsgServRsp.hasResultCode = YES;
+  resultImmsgServRsp.resultCode = value;
   return self;
 }
 - (IMMsgServRspBuilder*) clearResultCode {
-  result.hasResultCode = NO;
-  result.resultCode = ResultTypeRefuseReasonNone;
+  resultImmsgServRsp.hasResultCode = NO;
+  resultImmsgServRsp.resultCode = ResultTypeRefuseReasonNone;
   return self;
 }
 - (BOOL) hasPriorIp {
-  return result.hasPriorIp;
+  return resultImmsgServRsp.hasPriorIp;
 }
 - (NSString*) priorIp {
-  return result.priorIp;
+  return resultImmsgServRsp.priorIp;
 }
 - (IMMsgServRspBuilder*) setPriorIp:(NSString*) value {
-  result.hasPriorIp = YES;
-  result.priorIp = value;
+  resultImmsgServRsp.hasPriorIp = YES;
+  resultImmsgServRsp.priorIp = value;
   return self;
 }
 - (IMMsgServRspBuilder*) clearPriorIp {
-  result.hasPriorIp = NO;
-  result.priorIp = @"";
+  resultImmsgServRsp.hasPriorIp = NO;
+  resultImmsgServRsp.priorIp = @"";
   return self;
 }
 - (BOOL) hasBackipIp {
-  return result.hasBackipIp;
+  return resultImmsgServRsp.hasBackipIp;
 }
 - (NSString*) backipIp {
-  return result.backipIp;
+  return resultImmsgServRsp.backipIp;
 }
 - (IMMsgServRspBuilder*) setBackipIp:(NSString*) value {
-  result.hasBackipIp = YES;
-  result.backipIp = value;
+  resultImmsgServRsp.hasBackipIp = YES;
+  resultImmsgServRsp.backipIp = value;
   return self;
 }
 - (IMMsgServRspBuilder*) clearBackipIp {
-  result.hasBackipIp = NO;
-  result.backipIp = @"";
+  resultImmsgServRsp.hasBackipIp = NO;
+  resultImmsgServRsp.backipIp = @"";
   return self;
 }
 - (BOOL) hasPort {
-  return result.hasPort;
+  return resultImmsgServRsp.hasPort;
 }
 - (UInt32) port {
-  return result.port;
+  return resultImmsgServRsp.port;
 }
 - (IMMsgServRspBuilder*) setPort:(UInt32) value {
-  result.hasPort = YES;
-  result.port = value;
+  resultImmsgServRsp.hasPort = YES;
+  resultImmsgServRsp.port = value;
   return self;
 }
 - (IMMsgServRspBuilder*) clearPort {
-  result.hasPort = NO;
-  result.port = 0;
+  resultImmsgServRsp.hasPort = NO;
+  resultImmsgServRsp.port = 0;
   return self;
 }
 @end
@@ -546,44 +552,39 @@ static IMMsgServRsp* defaultIMMsgServRspInstance = nil;
 - (BOOL) hasUserName {
   return !!hasUserName_;
 }
-- (void) setHasUserName:(BOOL) value_ {
-  hasUserName_ = !!value_;
+- (void) setHasUserName:(BOOL) _value_ {
+  hasUserName_ = !!_value_;
 }
 @synthesize userName;
 - (BOOL) hasPassword {
   return !!hasPassword_;
 }
-- (void) setHasPassword:(BOOL) value_ {
-  hasPassword_ = !!value_;
+- (void) setHasPassword:(BOOL) _value_ {
+  hasPassword_ = !!_value_;
 }
 @synthesize password;
 - (BOOL) hasOnlineStatus {
   return !!hasOnlineStatus_;
 }
-- (void) setHasOnlineStatus:(BOOL) value_ {
-  hasOnlineStatus_ = !!value_;
+- (void) setHasOnlineStatus:(BOOL) _value_ {
+  hasOnlineStatus_ = !!_value_;
 }
 @synthesize onlineStatus;
 - (BOOL) hasClientType {
   return !!hasClientType_;
 }
-- (void) setHasClientType:(BOOL) value_ {
-  hasClientType_ = !!value_;
+- (void) setHasClientType:(BOOL) _value_ {
+  hasClientType_ = !!_value_;
 }
 @synthesize clientType;
 - (BOOL) hasClientVersion {
   return !!hasClientVersion_;
 }
-- (void) setHasClientVersion:(BOOL) value_ {
-  hasClientVersion_ = !!value_;
+- (void) setHasClientVersion:(BOOL) _value_ {
+  hasClientVersion_ = !!_value_;
 }
 @synthesize clientVersion;
-- (void) dealloc {
-  self.userName = nil;
-  self.password = nil;
-  self.clientVersion = nil;
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.userName = @"";
     self.password = @"";
@@ -599,10 +600,10 @@ static IMLoginReq* defaultIMLoginReqInstance = nil;
     defaultIMLoginReqInstance = [[IMLoginReq alloc] init];
   }
 }
-+ (IMLoginReq*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMLoginReqInstance;
 }
-- (IMLoginReq*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMLoginReqInstance;
 }
 - (BOOL) isInitialized {
@@ -702,15 +703,33 @@ static IMLoginReq* defaultIMLoginReqInstance = nil;
     [output appendFormat:@"%@%@: %@\n", indent, @"password", self.password];
   }
   if (self.hasOnlineStatus) {
-    [output appendFormat:@"%@%@: %d\n", indent, @"onlineStatus", self.onlineStatus];
+    [output appendFormat:@"%@%@: %@\n", indent, @"onlineStatus", NSStringFromUserStatType(self.onlineStatus)];
   }
   if (self.hasClientType) {
-    [output appendFormat:@"%@%@: %d\n", indent, @"clientType", self.clientType];
+    [output appendFormat:@"%@%@: %@\n", indent, @"clientType", NSStringFromClientType(self.clientType)];
   }
   if (self.hasClientVersion) {
     [output appendFormat:@"%@%@: %@\n", indent, @"clientVersion", self.clientVersion];
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
+}
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasUserName) {
+    [dictionary setObject: self.userName forKey: @"userName"];
+  }
+  if (self.hasPassword) {
+    [dictionary setObject: self.password forKey: @"password"];
+  }
+  if (self.hasOnlineStatus) {
+    [dictionary setObject: @(self.onlineStatus) forKey: @"onlineStatus"];
+  }
+  if (self.hasClientType) {
+    [dictionary setObject: @(self.clientType) forKey: @"clientType"];
+  }
+  if (self.hasClientVersion) {
+    [dictionary setObject: self.clientVersion forKey: @"clientVersion"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
 }
 - (BOOL) isEqual:(id)other {
   if (other == self) {
@@ -756,29 +775,26 @@ static IMLoginReq* defaultIMLoginReqInstance = nil;
 @end
 
 @interface IMLoginReqBuilder()
-@property (strong) IMLoginReq* result;
+@property (strong) IMLoginReq* resultImloginReq;
 @end
 
 @implementation IMLoginReqBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImloginReq;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMLoginReq alloc] init];
+    self.resultImloginReq = [[IMLoginReq alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImloginReq;
 }
 - (IMLoginReqBuilder*) clear {
-  self.result = [[IMLoginReq alloc] init];
+  self.resultImloginReq = [[IMLoginReq alloc] init];
   return self;
 }
 - (IMLoginReqBuilder*) clone {
-  return [IMLoginReq builderWithPrototype:result];
+  return [IMLoginReq builderWithPrototype:resultImloginReq];
 }
 - (IMLoginReq*) defaultInstance {
   return [IMLoginReq defaultInstance];
@@ -788,8 +804,8 @@ static IMLoginReq* defaultIMLoginReqInstance = nil;
   return [self buildPartial];
 }
 - (IMLoginReq*) buildPartial {
-  IMLoginReq* returnMe = result;
-  self.result = nil;
+  IMLoginReq* returnMe = resultImloginReq;
+  self.resultImloginReq = nil;
   return returnMe;
 }
 - (IMLoginReqBuilder*) mergeFrom:(IMLoginReq*) other {
@@ -866,83 +882,83 @@ static IMLoginReq* defaultIMLoginReqInstance = nil;
   }
 }
 - (BOOL) hasUserName {
-  return result.hasUserName;
+  return resultImloginReq.hasUserName;
 }
 - (NSString*) userName {
-  return result.userName;
+  return resultImloginReq.userName;
 }
 - (IMLoginReqBuilder*) setUserName:(NSString*) value {
-  result.hasUserName = YES;
-  result.userName = value;
+  resultImloginReq.hasUserName = YES;
+  resultImloginReq.userName = value;
   return self;
 }
 - (IMLoginReqBuilder*) clearUserName {
-  result.hasUserName = NO;
-  result.userName = @"";
+  resultImloginReq.hasUserName = NO;
+  resultImloginReq.userName = @"";
   return self;
 }
 - (BOOL) hasPassword {
-  return result.hasPassword;
+  return resultImloginReq.hasPassword;
 }
 - (NSString*) password {
-  return result.password;
+  return resultImloginReq.password;
 }
 - (IMLoginReqBuilder*) setPassword:(NSString*) value {
-  result.hasPassword = YES;
-  result.password = value;
+  resultImloginReq.hasPassword = YES;
+  resultImloginReq.password = value;
   return self;
 }
 - (IMLoginReqBuilder*) clearPassword {
-  result.hasPassword = NO;
-  result.password = @"";
+  resultImloginReq.hasPassword = NO;
+  resultImloginReq.password = @"";
   return self;
 }
 - (BOOL) hasOnlineStatus {
-  return result.hasOnlineStatus;
+  return resultImloginReq.hasOnlineStatus;
 }
 - (UserStatType) onlineStatus {
-  return result.onlineStatus;
+  return resultImloginReq.onlineStatus;
 }
 - (IMLoginReqBuilder*) setOnlineStatus:(UserStatType) value {
-  result.hasOnlineStatus = YES;
-  result.onlineStatus = value;
+  resultImloginReq.hasOnlineStatus = YES;
+  resultImloginReq.onlineStatus = value;
   return self;
 }
 - (IMLoginReqBuilder*) clearOnlineStatus {
-  result.hasOnlineStatus = NO;
-  result.onlineStatus = UserStatTypeUserStatusOnline;
+  resultImloginReq.hasOnlineStatus = NO;
+  resultImloginReq.onlineStatus = UserStatTypeUserStatusOnline;
   return self;
 }
 - (BOOL) hasClientType {
-  return result.hasClientType;
+  return resultImloginReq.hasClientType;
 }
 - (ClientType) clientType {
-  return result.clientType;
+  return resultImloginReq.clientType;
 }
 - (IMLoginReqBuilder*) setClientType:(ClientType) value {
-  result.hasClientType = YES;
-  result.clientType = value;
+  resultImloginReq.hasClientType = YES;
+  resultImloginReq.clientType = value;
   return self;
 }
 - (IMLoginReqBuilder*) clearClientType {
-  result.hasClientType = NO;
-  result.clientType = ClientTypeClientTypeWindows;
+  resultImloginReq.hasClientType = NO;
+  resultImloginReq.clientType = ClientTypeClientTypeWindows;
   return self;
 }
 - (BOOL) hasClientVersion {
-  return result.hasClientVersion;
+  return resultImloginReq.hasClientVersion;
 }
 - (NSString*) clientVersion {
-  return result.clientVersion;
+  return resultImloginReq.clientVersion;
 }
 - (IMLoginReqBuilder*) setClientVersion:(NSString*) value {
-  result.hasClientVersion = YES;
-  result.clientVersion = value;
+  resultImloginReq.hasClientVersion = YES;
+  resultImloginReq.clientVersion = value;
   return self;
 }
 - (IMLoginReqBuilder*) clearClientVersion {
-  result.hasClientVersion = NO;
-  result.clientVersion = @"";
+  resultImloginReq.hasClientVersion = NO;
+  resultImloginReq.clientVersion = @"";
   return self;
 }
 @end
@@ -960,43 +976,39 @@ static IMLoginReq* defaultIMLoginReqInstance = nil;
 - (BOOL) hasServerTime {
   return !!hasServerTime_;
 }
-- (void) setHasServerTime:(BOOL) value_ {
-  hasServerTime_ = !!value_;
+- (void) setHasServerTime:(BOOL) _value_ {
+  hasServerTime_ = !!_value_;
 }
 @synthesize serverTime;
 - (BOOL) hasResultCode {
   return !!hasResultCode_;
 }
-- (void) setHasResultCode:(BOOL) value_ {
-  hasResultCode_ = !!value_;
+- (void) setHasResultCode:(BOOL) _value_ {
+  hasResultCode_ = !!_value_;
 }
 @synthesize resultCode;
 - (BOOL) hasResultString {
   return !!hasResultString_;
 }
-- (void) setHasResultString:(BOOL) value_ {
-  hasResultString_ = !!value_;
+- (void) setHasResultString:(BOOL) _value_ {
+  hasResultString_ = !!_value_;
 }
 @synthesize resultString;
 - (BOOL) hasOnlineStatus {
   return !!hasOnlineStatus_;
 }
-- (void) setHasOnlineStatus:(BOOL) value_ {
-  hasOnlineStatus_ = !!value_;
+- (void) setHasOnlineStatus:(BOOL) _value_ {
+  hasOnlineStatus_ = !!_value_;
 }
 @synthesize onlineStatus;
 - (BOOL) hasUserInfo {
   return !!hasUserInfo_;
 }
-- (void) setHasUserInfo:(BOOL) value_ {
-  hasUserInfo_ = !!value_;
+- (void) setHasUserInfo:(BOOL) _value_ {
+  hasUserInfo_ = !!_value_;
 }
 @synthesize userInfo;
-- (void) dealloc {
-  self.resultString = nil;
-  self.userInfo = nil;
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.serverTime = 0;
     self.resultCode = ResultTypeRefuseReasonNone;
@@ -1012,10 +1024,10 @@ static IMLoginRes* defaultIMLoginResInstance = nil;
     defaultIMLoginResInstance = [[IMLoginRes alloc] init];
   }
 }
-+ (IMLoginRes*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMLoginResInstance;
 }
-- (IMLoginRes*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMLoginResInstance;
 }
 - (BOOL) isInitialized {
@@ -1111,13 +1123,13 @@ static IMLoginRes* defaultIMLoginResInstance = nil;
     [output appendFormat:@"%@%@: %@\n", indent, @"serverTime", [NSNumber numberWithInteger:self.serverTime]];
   }
   if (self.hasResultCode) {
-    [output appendFormat:@"%@%@: %d\n", indent, @"resultCode", self.resultCode];
+    [output appendFormat:@"%@%@: %@\n", indent, @"resultCode", NSStringFromResultType(self.resultCode)];
   }
   if (self.hasResultString) {
     [output appendFormat:@"%@%@: %@\n", indent, @"resultString", self.resultString];
   }
   if (self.hasOnlineStatus) {
-    [output appendFormat:@"%@%@: %d\n", indent, @"onlineStatus", self.onlineStatus];
+    [output appendFormat:@"%@%@: %@\n", indent, @"onlineStatus", NSStringFromUserStatType(self.onlineStatus)];
   }
   if (self.hasUserInfo) {
     [output appendFormat:@"%@%@ {\n", indent, @"userInfo"];
@@ -1126,6 +1138,26 @@ static IMLoginRes* defaultIMLoginResInstance = nil;
     [output appendFormat:@"%@}\n", indent];
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
+}
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasServerTime) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.serverTime] forKey: @"serverTime"];
+  }
+  if (self.hasResultCode) {
+    [dictionary setObject: @(self.resultCode) forKey: @"resultCode"];
+  }
+  if (self.hasResultString) {
+    [dictionary setObject: self.resultString forKey: @"resultString"];
+  }
+  if (self.hasOnlineStatus) {
+    [dictionary setObject: @(self.onlineStatus) forKey: @"onlineStatus"];
+  }
+  if (self.hasUserInfo) {
+   NSMutableDictionary *messageDictionary = [NSMutableDictionary dictionary]; 
+   [self.userInfo storeInDictionary:messageDictionary];
+   [dictionary setObject:[NSDictionary dictionaryWithDictionary:messageDictionary] forKey:@"userInfo"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
 }
 - (BOOL) isEqual:(id)other {
   if (other == self) {
@@ -1171,29 +1203,26 @@ static IMLoginRes* defaultIMLoginResInstance = nil;
 @end
 
 @interface IMLoginResBuilder()
-@property (strong) IMLoginRes* result;
+@property (strong) IMLoginRes* resultImloginRes;
 @end
 
 @implementation IMLoginResBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImloginRes;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMLoginRes alloc] init];
+    self.resultImloginRes = [[IMLoginRes alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImloginRes;
 }
 - (IMLoginResBuilder*) clear {
-  self.result = [[IMLoginRes alloc] init];
+  self.resultImloginRes = [[IMLoginRes alloc] init];
   return self;
 }
 - (IMLoginResBuilder*) clone {
-  return [IMLoginRes builderWithPrototype:result];
+  return [IMLoginRes builderWithPrototype:resultImloginRes];
 }
 - (IMLoginRes*) defaultInstance {
   return [IMLoginRes defaultInstance];
@@ -1203,8 +1232,8 @@ static IMLoginRes* defaultIMLoginResInstance = nil;
   return [self buildPartial];
 }
 - (IMLoginRes*) buildPartial {
-  IMLoginRes* returnMe = result;
-  self.result = nil;
+  IMLoginRes* returnMe = resultImloginRes;
+  self.resultImloginRes = nil;
   return returnMe;
 }
 - (IMLoginResBuilder*) mergeFrom:(IMLoginRes*) other {
@@ -1286,97 +1315,97 @@ static IMLoginRes* defaultIMLoginResInstance = nil;
   }
 }
 - (BOOL) hasServerTime {
-  return result.hasServerTime;
+  return resultImloginRes.hasServerTime;
 }
 - (UInt32) serverTime {
-  return result.serverTime;
+  return resultImloginRes.serverTime;
 }
 - (IMLoginResBuilder*) setServerTime:(UInt32) value {
-  result.hasServerTime = YES;
-  result.serverTime = value;
+  resultImloginRes.hasServerTime = YES;
+  resultImloginRes.serverTime = value;
   return self;
 }
 - (IMLoginResBuilder*) clearServerTime {
-  result.hasServerTime = NO;
-  result.serverTime = 0;
+  resultImloginRes.hasServerTime = NO;
+  resultImloginRes.serverTime = 0;
   return self;
 }
 - (BOOL) hasResultCode {
-  return result.hasResultCode;
+  return resultImloginRes.hasResultCode;
 }
 - (ResultType) resultCode {
-  return result.resultCode;
+  return resultImloginRes.resultCode;
 }
 - (IMLoginResBuilder*) setResultCode:(ResultType) value {
-  result.hasResultCode = YES;
-  result.resultCode = value;
+  resultImloginRes.hasResultCode = YES;
+  resultImloginRes.resultCode = value;
   return self;
 }
 - (IMLoginResBuilder*) clearResultCode {
-  result.hasResultCode = NO;
-  result.resultCode = ResultTypeRefuseReasonNone;
+  resultImloginRes.hasResultCode = NO;
+  resultImloginRes.resultCode = ResultTypeRefuseReasonNone;
   return self;
 }
 - (BOOL) hasResultString {
-  return result.hasResultString;
+  return resultImloginRes.hasResultString;
 }
 - (NSString*) resultString {
-  return result.resultString;
+  return resultImloginRes.resultString;
 }
 - (IMLoginResBuilder*) setResultString:(NSString*) value {
-  result.hasResultString = YES;
-  result.resultString = value;
+  resultImloginRes.hasResultString = YES;
+  resultImloginRes.resultString = value;
   return self;
 }
 - (IMLoginResBuilder*) clearResultString {
-  result.hasResultString = NO;
-  result.resultString = @"";
+  resultImloginRes.hasResultString = NO;
+  resultImloginRes.resultString = @"";
   return self;
 }
 - (BOOL) hasOnlineStatus {
-  return result.hasOnlineStatus;
+  return resultImloginRes.hasOnlineStatus;
 }
 - (UserStatType) onlineStatus {
-  return result.onlineStatus;
+  return resultImloginRes.onlineStatus;
 }
 - (IMLoginResBuilder*) setOnlineStatus:(UserStatType) value {
-  result.hasOnlineStatus = YES;
-  result.onlineStatus = value;
+  resultImloginRes.hasOnlineStatus = YES;
+  resultImloginRes.onlineStatus = value;
   return self;
 }
 - (IMLoginResBuilder*) clearOnlineStatus {
-  result.hasOnlineStatus = NO;
-  result.onlineStatus = UserStatTypeUserStatusOnline;
+  resultImloginRes.hasOnlineStatus = NO;
+  resultImloginRes.onlineStatus = UserStatTypeUserStatusOnline;
   return self;
 }
 - (BOOL) hasUserInfo {
-  return result.hasUserInfo;
+  return resultImloginRes.hasUserInfo;
 }
 - (UserInfo*) userInfo {
-  return result.userInfo;
+  return resultImloginRes.userInfo;
 }
 - (IMLoginResBuilder*) setUserInfo:(UserInfo*) value {
-  result.hasUserInfo = YES;
-  result.userInfo = value;
+  resultImloginRes.hasUserInfo = YES;
+  resultImloginRes.userInfo = value;
   return self;
 }
 - (IMLoginResBuilder*) setUserInfoBuilder:(UserInfoBuilder*) builderForValue {
   return [self setUserInfo:[builderForValue build]];
 }
 - (IMLoginResBuilder*) mergeUserInfo:(UserInfo*) value {
-  if (result.hasUserInfo &&
-      result.userInfo != [UserInfo defaultInstance]) {
-    result.userInfo =
-      [[[UserInfo builderWithPrototype:result.userInfo] mergeFrom:value] buildPartial];
+  if (resultImloginRes.hasUserInfo &&
+      resultImloginRes.userInfo != [UserInfo defaultInstance]) {
+    resultImloginRes.userInfo =
+      [[[UserInfo builderWithPrototype:resultImloginRes.userInfo] mergeFrom:value] buildPartial];
   } else {
-    result.userInfo = value;
+    resultImloginRes.userInfo = value;
   }
-  result.hasUserInfo = YES;
+  resultImloginRes.hasUserInfo = YES;
   return self;
 }
 - (IMLoginResBuilder*) clearUserInfo {
-  result.hasUserInfo = NO;
-  result.userInfo = [UserInfo defaultInstance];
+  resultImloginRes.hasUserInfo = NO;
+  resultImloginRes.userInfo = [UserInfo defaultInstance];
   return self;
 }
 @end
@@ -1386,9 +1415,7 @@ static IMLoginRes* defaultIMLoginResInstance = nil;
 
 @implementation IMLogoutReq
 
-- (void) dealloc {
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
   }
   return self;
@@ -1399,10 +1426,10 @@ static IMLogoutReq* defaultIMLogoutReqInstance = nil;
     defaultIMLogoutReqInstance = [[IMLogoutReq alloc] init];
   }
 }
-+ (IMLogoutReq*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMLogoutReqInstance;
 }
-- (IMLogoutReq*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMLogoutReqInstance;
 }
 - (BOOL) isInitialized {
@@ -1455,6 +1482,9 @@ static IMLogoutReq* defaultIMLogoutReqInstance = nil;
 - (void) writeDescriptionTo:(NSMutableString*) output withIndent:(NSString*) indent {
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  [self.unknownFields storeInDictionary:dictionary];
+}
 - (BOOL) isEqual:(id)other {
   if (other == self) {
     return YES;
@@ -1474,29 +1504,26 @@ static IMLogoutReq* defaultIMLogoutReqInstance = nil;
 @end
 
 @interface IMLogoutReqBuilder()
-@property (strong) IMLogoutReq* result;
+@property (strong) IMLogoutReq* resultImlogoutReq;
 @end
 
 @implementation IMLogoutReqBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImlogoutReq;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMLogoutReq alloc] init];
+    self.resultImlogoutReq = [[IMLogoutReq alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImlogoutReq;
 }
 - (IMLogoutReqBuilder*) clear {
-  self.result = [[IMLogoutReq alloc] init];
+  self.resultImlogoutReq = [[IMLogoutReq alloc] init];
   return self;
 }
 - (IMLogoutReqBuilder*) clone {
-  return [IMLogoutReq builderWithPrototype:result];
+  return [IMLogoutReq builderWithPrototype:resultImlogoutReq];
 }
 - (IMLogoutReq*) defaultInstance {
   return [IMLogoutReq defaultInstance];
@@ -1506,8 +1533,8 @@ static IMLogoutReq* defaultIMLogoutReqInstance = nil;
   return [self buildPartial];
 }
 - (IMLogoutReq*) buildPartial {
-  IMLogoutReq* returnMe = result;
-  self.result = nil;
+  IMLogoutReq* returnMe = resultImlogoutReq;
+  self.resultImlogoutReq = nil;
   return returnMe;
 }
 - (IMLogoutReqBuilder*) mergeFrom:(IMLogoutReq*) other {
@@ -1549,13 +1576,11 @@ static IMLogoutReq* defaultIMLogoutReqInstance = nil;
 - (BOOL) hasResultCode {
   return !!hasResultCode_;
 }
-- (void) setHasResultCode:(BOOL) value_ {
-  hasResultCode_ = !!value_;
+- (void) setHasResultCode:(BOOL) _value_ {
+  hasResultCode_ = !!_value_;
 }
 @synthesize resultCode;
-- (void) dealloc {
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.resultCode = 0;
   }
@@ -1567,10 +1592,10 @@ static IMLogoutRsp* defaultIMLogoutRspInstance = nil;
     defaultIMLogoutRspInstance = [[IMLogoutRsp alloc] init];
   }
 }
-+ (IMLogoutRsp*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMLogoutRspInstance;
 }
-- (IMLogoutRsp*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMLogoutRspInstance;
 }
 - (BOOL) isInitialized {
@@ -1635,6 +1660,12 @@ static IMLogoutRsp* defaultIMLogoutRspInstance = nil;
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasResultCode) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.resultCode] forKey: @"resultCode"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
+}
 - (BOOL) isEqual:(id)other {
   if (other == self) {
     return YES;
@@ -1659,29 +1690,26 @@ static IMLogoutRsp* defaultIMLogoutRspInstance = nil;
 @end
 
 @interface IMLogoutRspBuilder()
-@property (strong) IMLogoutRsp* result;
+@property (strong) IMLogoutRsp* resultImlogoutRsp;
 @end
 
 @implementation IMLogoutRspBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImlogoutRsp;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMLogoutRsp alloc] init];
+    self.resultImlogoutRsp = [[IMLogoutRsp alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImlogoutRsp;
 }
 - (IMLogoutRspBuilder*) clear {
-  self.result = [[IMLogoutRsp alloc] init];
+  self.resultImlogoutRsp = [[IMLogoutRsp alloc] init];
   return self;
 }
 - (IMLogoutRspBuilder*) clone {
-  return [IMLogoutRsp builderWithPrototype:result];
+  return [IMLogoutRsp builderWithPrototype:resultImlogoutRsp];
 }
 - (IMLogoutRsp*) defaultInstance {
   return [IMLogoutRsp defaultInstance];
@@ -1691,8 +1719,8 @@ static IMLogoutRsp* defaultIMLogoutRspInstance = nil;
   return [self buildPartial];
 }
 - (IMLogoutRsp*) buildPartial {
-  IMLogoutRsp* returnMe = result;
-  self.result = nil;
+  IMLogoutRsp* returnMe = resultImlogoutRsp;
+  self.resultImlogoutRsp = nil;
   return returnMe;
 }
 - (IMLogoutRspBuilder*) mergeFrom:(IMLogoutRsp*) other {
@@ -1731,19 +1759,19 @@ static IMLogoutRsp* defaultIMLogoutRspInstance = nil;
   }
 }
 - (BOOL) hasResultCode {
-  return result.hasResultCode;
+  return resultImlogoutRsp.hasResultCode;
 }
 - (UInt32) resultCode {
-  return result.resultCode;
+  return resultImlogoutRsp.resultCode;
 }
 - (IMLogoutRspBuilder*) setResultCode:(UInt32) value {
-  result.hasResultCode = YES;
-  result.resultCode = value;
+  resultImlogoutRsp.hasResultCode = YES;
+  resultImlogoutRsp.resultCode = value;
   return self;
 }
 - (IMLogoutRspBuilder*) clearResultCode {
-  result.hasResultCode = NO;
-  result.resultCode = 0;
+  resultImlogoutRsp.hasResultCode = NO;
+  resultImlogoutRsp.resultCode = 0;
   return self;
 }
 @end
@@ -1758,20 +1786,18 @@ static IMLogoutRsp* defaultIMLogoutRspInstance = nil;
 - (BOOL) hasUserId {
   return !!hasUserId_;
 }
-- (void) setHasUserId:(BOOL) value_ {
-  hasUserId_ = !!value_;
+- (void) setHasUserId:(BOOL) _value_ {
+  hasUserId_ = !!_value_;
 }
 @synthesize userId;
 - (BOOL) hasKickReason {
   return !!hasKickReason_;
 }
-- (void) setHasKickReason:(BOOL) value_ {
-  hasKickReason_ = !!value_;
+- (void) setHasKickReason:(BOOL) _value_ {
+  hasKickReason_ = !!_value_;
 }
 @synthesize kickReason;
-- (void) dealloc {
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.userId = 0;
     self.kickReason = KickReasonTypeKickReasonDuplicateUser;
@@ -1784,10 +1810,10 @@ static IMKickUser* defaultIMKickUserInstance = nil;
     defaultIMKickUserInstance = [[IMKickUser alloc] init];
   }
 }
-+ (IMKickUser*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMKickUserInstance;
 }
-- (IMKickUser*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMKickUserInstance;
 }
 - (BOOL) isInitialized {
@@ -1860,9 +1886,18 @@ static IMKickUser* defaultIMKickUserInstance = nil;
     [output appendFormat:@"%@%@: %@\n", indent, @"userId", [NSNumber numberWithInteger:self.userId]];
   }
   if (self.hasKickReason) {
-    [output appendFormat:@"%@%@: %d\n", indent, @"kickReason", self.kickReason];
+    [output appendFormat:@"%@%@: %@\n", indent, @"kickReason", NSStringFromKickReasonType(self.kickReason)];
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
+}
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasUserId) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.userId] forKey: @"userId"];
+  }
+  if (self.hasKickReason) {
+    [dictionary setObject: @(self.kickReason) forKey: @"kickReason"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
 }
 - (BOOL) isEqual:(id)other {
   if (other == self) {
@@ -1893,29 +1928,26 @@ static IMKickUser* defaultIMKickUserInstance = nil;
 @end
 
 @interface IMKickUserBuilder()
-@property (strong) IMKickUser* result;
+@property (strong) IMKickUser* resultImkickUser;
 @end
 
 @implementation IMKickUserBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImkickUser;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMKickUser alloc] init];
+    self.resultImkickUser = [[IMKickUser alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImkickUser;
 }
 - (IMKickUserBuilder*) clear {
-  self.result = [[IMKickUser alloc] init];
+  self.resultImkickUser = [[IMKickUser alloc] init];
   return self;
 }
 - (IMKickUserBuilder*) clone {
-  return [IMKickUser builderWithPrototype:result];
+  return [IMKickUser builderWithPrototype:resultImkickUser];
 }
 - (IMKickUser*) defaultInstance {
   return [IMKickUser defaultInstance];
@@ -1925,8 +1957,8 @@ static IMKickUser* defaultIMKickUserInstance = nil;
   return [self buildPartial];
 }
 - (IMKickUser*) buildPartial {
-  IMKickUser* returnMe = result;
-  self.result = nil;
+  IMKickUser* returnMe = resultImkickUser;
+  self.resultImkickUser = nil;
   return returnMe;
 }
 - (IMKickUserBuilder*) mergeFrom:(IMKickUser*) other {
@@ -1977,35 +2009,35 @@ static IMKickUser* defaultIMKickUserInstance = nil;
   }
 }
 - (BOOL) hasUserId {
-  return result.hasUserId;
+  return resultImkickUser.hasUserId;
 }
 - (UInt32) userId {
-  return result.userId;
+  return resultImkickUser.userId;
 }
 - (IMKickUserBuilder*) setUserId:(UInt32) value {
-  result.hasUserId = YES;
-  result.userId = value;
+  resultImkickUser.hasUserId = YES;
+  resultImkickUser.userId = value;
   return self;
 }
 - (IMKickUserBuilder*) clearUserId {
-  result.hasUserId = NO;
-  result.userId = 0;
+  resultImkickUser.hasUserId = NO;
+  resultImkickUser.userId = 0;
   return self;
 }
 - (BOOL) hasKickReason {
-  return result.hasKickReason;
+  return resultImkickUser.hasKickReason;
 }
 - (KickReasonType) kickReason {
-  return result.kickReason;
+  return resultImkickUser.kickReason;
 }
 - (IMKickUserBuilder*) setKickReason:(KickReasonType) value {
-  result.hasKickReason = YES;
-  result.kickReason = value;
+  resultImkickUser.hasKickReason = YES;
+  resultImkickUser.kickReason = value;
   return self;
 }
 - (IMKickUserBuilder*) clearKickReason {
-  result.hasKickReason = NO;
-  result.kickReason = KickReasonTypeKickReasonDuplicateUser;
+  resultImkickUser.hasKickReason = NO;
+  resultImkickUser.kickReason = KickReasonTypeKickReasonDuplicateUser;
   return self;
 }
 @end
@@ -2022,36 +2054,32 @@ static IMKickUser* defaultIMKickUserInstance = nil;
 - (BOOL) hasUserId {
   return !!hasUserId_;
 }
-- (void) setHasUserId:(BOOL) value_ {
-  hasUserId_ = !!value_;
+- (void) setHasUserId:(BOOL) _value_ {
+  hasUserId_ = !!_value_;
 }
 @synthesize userId;
 - (BOOL) hasDeviceToken {
   return !!hasDeviceToken_;
 }
-- (void) setHasDeviceToken:(BOOL) value_ {
-  hasDeviceToken_ = !!value_;
+- (void) setHasDeviceToken:(BOOL) _value_ {
+  hasDeviceToken_ = !!_value_;
 }
 @synthesize deviceToken;
 - (BOOL) hasClientType {
   return !!hasClientType_;
 }
-- (void) setHasClientType:(BOOL) value_ {
-  hasClientType_ = !!value_;
+- (void) setHasClientType:(BOOL) _value_ {
+  hasClientType_ = !!_value_;
 }
 @synthesize clientType;
 - (BOOL) hasAttachData {
   return !!hasAttachData_;
 }
-- (void) setHasAttachData:(BOOL) value_ {
-  hasAttachData_ = !!value_;
+- (void) setHasAttachData:(BOOL) _value_ {
+  hasAttachData_ = !!_value_;
 }
 @synthesize attachData;
-- (void) dealloc {
-  self.deviceToken = nil;
-  self.attachData = nil;
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.userId = 0;
     self.deviceToken = @"";
@@ -2066,10 +2094,10 @@ static IMDeviceTokenReq* defaultIMDeviceTokenReqInstance = nil;
     defaultIMDeviceTokenReqInstance = [[IMDeviceTokenReq alloc] init];
   }
 }
-+ (IMDeviceTokenReq*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMDeviceTokenReqInstance;
 }
-- (IMDeviceTokenReq*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMDeviceTokenReqInstance;
 }
 - (BOOL) isInitialized {
@@ -2157,12 +2185,27 @@ static IMDeviceTokenReq* defaultIMDeviceTokenReqInstance = nil;
     [output appendFormat:@"%@%@: %@\n", indent, @"deviceToken", self.deviceToken];
   }
   if (self.hasClientType) {
-    [output appendFormat:@"%@%@: %d\n", indent, @"clientType", self.clientType];
+    [output appendFormat:@"%@%@: %@\n", indent, @"clientType", NSStringFromClientType(self.clientType)];
   }
   if (self.hasAttachData) {
     [output appendFormat:@"%@%@: %@\n", indent, @"attachData", self.attachData];
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
+}
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasUserId) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.userId] forKey: @"userId"];
+  }
+  if (self.hasDeviceToken) {
+    [dictionary setObject: self.deviceToken forKey: @"deviceToken"];
+  }
+  if (self.hasClientType) {
+    [dictionary setObject: @(self.clientType) forKey: @"clientType"];
+  }
+  if (self.hasAttachData) {
+    [dictionary setObject: self.attachData forKey: @"attachData"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
 }
 - (BOOL) isEqual:(id)other {
   if (other == self) {
@@ -2203,29 +2246,26 @@ static IMDeviceTokenReq* defaultIMDeviceTokenReqInstance = nil;
 @end
 
 @interface IMDeviceTokenReqBuilder()
-@property (strong) IMDeviceTokenReq* result;
+@property (strong) IMDeviceTokenReq* resultImdeviceTokenReq;
 @end
 
 @implementation IMDeviceTokenReqBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImdeviceTokenReq;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMDeviceTokenReq alloc] init];
+    self.resultImdeviceTokenReq = [[IMDeviceTokenReq alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImdeviceTokenReq;
 }
 - (IMDeviceTokenReqBuilder*) clear {
-  self.result = [[IMDeviceTokenReq alloc] init];
+  self.resultImdeviceTokenReq = [[IMDeviceTokenReq alloc] init];
   return self;
 }
 - (IMDeviceTokenReqBuilder*) clone {
-  return [IMDeviceTokenReq builderWithPrototype:result];
+  return [IMDeviceTokenReq builderWithPrototype:resultImdeviceTokenReq];
 }
 - (IMDeviceTokenReq*) defaultInstance {
   return [IMDeviceTokenReq defaultInstance];
@@ -2235,8 +2275,8 @@ static IMDeviceTokenReq* defaultIMDeviceTokenReqInstance = nil;
   return [self buildPartial];
 }
 - (IMDeviceTokenReq*) buildPartial {
-  IMDeviceTokenReq* returnMe = result;
-  self.result = nil;
+  IMDeviceTokenReq* returnMe = resultImdeviceTokenReq;
+  self.resultImdeviceTokenReq = nil;
   return returnMe;
 }
 - (IMDeviceTokenReqBuilder*) mergeFrom:(IMDeviceTokenReq*) other {
@@ -2301,67 +2341,67 @@ static IMDeviceTokenReq* defaultIMDeviceTokenReqInstance = nil;
   }
 }
 - (BOOL) hasUserId {
-  return result.hasUserId;
+  return resultImdeviceTokenReq.hasUserId;
 }
 - (UInt32) userId {
-  return result.userId;
+  return resultImdeviceTokenReq.userId;
 }
 - (IMDeviceTokenReqBuilder*) setUserId:(UInt32) value {
-  result.hasUserId = YES;
-  result.userId = value;
+  resultImdeviceTokenReq.hasUserId = YES;
+  resultImdeviceTokenReq.userId = value;
   return self;
 }
 - (IMDeviceTokenReqBuilder*) clearUserId {
-  result.hasUserId = NO;
-  result.userId = 0;
+  resultImdeviceTokenReq.hasUserId = NO;
+  resultImdeviceTokenReq.userId = 0;
   return self;
 }
 - (BOOL) hasDeviceToken {
-  return result.hasDeviceToken;
+  return resultImdeviceTokenReq.hasDeviceToken;
 }
 - (NSString*) deviceToken {
-  return result.deviceToken;
+  return resultImdeviceTokenReq.deviceToken;
 }
 - (IMDeviceTokenReqBuilder*) setDeviceToken:(NSString*) value {
-  result.hasDeviceToken = YES;
-  result.deviceToken = value;
+  resultImdeviceTokenReq.hasDeviceToken = YES;
+  resultImdeviceTokenReq.deviceToken = value;
   return self;
 }
 - (IMDeviceTokenReqBuilder*) clearDeviceToken {
-  result.hasDeviceToken = NO;
-  result.deviceToken = @"";
+  resultImdeviceTokenReq.hasDeviceToken = NO;
+  resultImdeviceTokenReq.deviceToken = @"";
   return self;
 }
 - (BOOL) hasClientType {
-  return result.hasClientType;
+  return resultImdeviceTokenReq.hasClientType;
 }
 - (ClientType) clientType {
-  return result.clientType;
+  return resultImdeviceTokenReq.clientType;
 }
 - (IMDeviceTokenReqBuilder*) setClientType:(ClientType) value {
-  result.hasClientType = YES;
-  result.clientType = value;
+  resultImdeviceTokenReq.hasClientType = YES;
+  resultImdeviceTokenReq.clientType = value;
   return self;
 }
 - (IMDeviceTokenReqBuilder*) clearClientType {
-  result.hasClientType = NO;
-  result.clientType = ClientTypeClientTypeWindows;
+  resultImdeviceTokenReq.hasClientType = NO;
+  resultImdeviceTokenReq.clientType = ClientTypeClientTypeWindows;
   return self;
 }
 - (BOOL) hasAttachData {
-  return result.hasAttachData;
+  return resultImdeviceTokenReq.hasAttachData;
 }
 - (NSData*) attachData {
-  return result.attachData;
+  return resultImdeviceTokenReq.attachData;
 }
 - (IMDeviceTokenReqBuilder*) setAttachData:(NSData*) value {
-  result.hasAttachData = YES;
-  result.attachData = value;
+  resultImdeviceTokenReq.hasAttachData = YES;
+  resultImdeviceTokenReq.attachData = value;
   return self;
 }
 - (IMDeviceTokenReqBuilder*) clearAttachData {
-  result.hasAttachData = NO;
-  result.attachData = [NSData data];
+  resultImdeviceTokenReq.hasAttachData = NO;
+  resultImdeviceTokenReq.attachData = [NSData data];
   return self;
 }
 @end
@@ -2376,21 +2416,18 @@ static IMDeviceTokenReq* defaultIMDeviceTokenReqInstance = nil;
 - (BOOL) hasUserId {
   return !!hasUserId_;
 }
-- (void) setHasUserId:(BOOL) value_ {
-  hasUserId_ = !!value_;
+- (void) setHasUserId:(BOOL) _value_ {
+  hasUserId_ = !!_value_;
 }
 @synthesize userId;
 - (BOOL) hasAttachData {
   return !!hasAttachData_;
 }
-- (void) setHasAttachData:(BOOL) value_ {
-  hasAttachData_ = !!value_;
+- (void) setHasAttachData:(BOOL) _value_ {
+  hasAttachData_ = !!_value_;
 }
 @synthesize attachData;
-- (void) dealloc {
-  self.attachData = nil;
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.userId = 0;
     self.attachData = [NSData data];
@@ -2403,10 +2440,10 @@ static IMDeviceTokenRsp* defaultIMDeviceTokenRspInstance = nil;
     defaultIMDeviceTokenRspInstance = [[IMDeviceTokenRsp alloc] init];
   }
 }
-+ (IMDeviceTokenRsp*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMDeviceTokenRspInstance;
 }
-- (IMDeviceTokenRsp*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMDeviceTokenRspInstance;
 }
 - (BOOL) isInitialized {
@@ -2480,6 +2517,15 @@ static IMDeviceTokenRsp* defaultIMDeviceTokenRspInstance = nil;
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasUserId) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.userId] forKey: @"userId"];
+  }
+  if (self.hasAttachData) {
+    [dictionary setObject: self.attachData forKey: @"attachData"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
+}
 - (BOOL) isEqual:(id)other {
   if (other == self) {
     return YES;
@@ -2509,29 +2555,26 @@ static IMDeviceTokenRsp* defaultIMDeviceTokenRspInstance = nil;
 @end
 
 @interface IMDeviceTokenRspBuilder()
-@property (strong) IMDeviceTokenRsp* result;
+@property (strong) IMDeviceTokenRsp* resultImdeviceTokenRsp;
 @end
 
 @implementation IMDeviceTokenRspBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImdeviceTokenRsp;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMDeviceTokenRsp alloc] init];
+    self.resultImdeviceTokenRsp = [[IMDeviceTokenRsp alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImdeviceTokenRsp;
 }
 - (IMDeviceTokenRspBuilder*) clear {
-  self.result = [[IMDeviceTokenRsp alloc] init];
+  self.resultImdeviceTokenRsp = [[IMDeviceTokenRsp alloc] init];
   return self;
 }
 - (IMDeviceTokenRspBuilder*) clone {
-  return [IMDeviceTokenRsp builderWithPrototype:result];
+  return [IMDeviceTokenRsp builderWithPrototype:resultImdeviceTokenRsp];
 }
 - (IMDeviceTokenRsp*) defaultInstance {
   return [IMDeviceTokenRsp defaultInstance];
@@ -2541,8 +2584,8 @@ static IMDeviceTokenRsp* defaultIMDeviceTokenRspInstance = nil;
   return [self buildPartial];
 }
 - (IMDeviceTokenRsp*) buildPartial {
-  IMDeviceTokenRsp* returnMe = result;
-  self.result = nil;
+  IMDeviceTokenRsp* returnMe = resultImdeviceTokenRsp;
+  self.resultImdeviceTokenRsp = nil;
   return returnMe;
 }
 - (IMDeviceTokenRspBuilder*) mergeFrom:(IMDeviceTokenRsp*) other {
@@ -2588,35 +2631,35 @@ static IMDeviceTokenRsp* defaultIMDeviceTokenRspInstance = nil;
   }
 }
 - (BOOL) hasUserId {
-  return result.hasUserId;
+  return resultImdeviceTokenRsp.hasUserId;
 }
 - (UInt32) userId {
-  return result.userId;
+  return resultImdeviceTokenRsp.userId;
 }
 - (IMDeviceTokenRspBuilder*) setUserId:(UInt32) value {
-  result.hasUserId = YES;
-  result.userId = value;
+  resultImdeviceTokenRsp.hasUserId = YES;
+  resultImdeviceTokenRsp.userId = value;
   return self;
 }
 - (IMDeviceTokenRspBuilder*) clearUserId {
-  result.hasUserId = NO;
-  result.userId = 0;
+  resultImdeviceTokenRsp.hasUserId = NO;
+  resultImdeviceTokenRsp.userId = 0;
   return self;
 }
 - (BOOL) hasAttachData {
-  return result.hasAttachData;
+  return resultImdeviceTokenRsp.hasAttachData;
 }
 - (NSData*) attachData {
-  return result.attachData;
+  return resultImdeviceTokenRsp.attachData;
 }
 - (IMDeviceTokenRspBuilder*) setAttachData:(NSData*) value {
-  result.hasAttachData = YES;
-  result.attachData = value;
+  resultImdeviceTokenRsp.hasAttachData = YES;
+  resultImdeviceTokenRsp.attachData = value;
   return self;
 }
 - (IMDeviceTokenRspBuilder*) clearAttachData {
-  result.hasAttachData = NO;
-  result.attachData = [NSData data];
+  resultImdeviceTokenRsp.hasAttachData = NO;
+  resultImdeviceTokenRsp.attachData = [NSData data];
   return self;
 }
 @end
@@ -2630,13 +2673,11 @@ static IMDeviceTokenRsp* defaultIMDeviceTokenRspInstance = nil;
 - (BOOL) hasUserId {
   return !!hasUserId_;
 }
-- (void) setHasUserId:(BOOL) value_ {
-  hasUserId_ = !!value_;
+- (void) setHasUserId:(BOOL) _value_ {
+  hasUserId_ = !!_value_;
 }
 @synthesize userId;
-- (void) dealloc {
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.userId = 0;
   }
@@ -2648,10 +2689,10 @@ static IMKickPCClientReq* defaultIMKickPCClientReqInstance = nil;
     defaultIMKickPCClientReqInstance = [[IMKickPCClientReq alloc] init];
   }
 }
-+ (IMKickPCClientReq*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMKickPCClientReqInstance;
 }
-- (IMKickPCClientReq*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMKickPCClientReqInstance;
 }
 - (BOOL) isInitialized {
@@ -2716,6 +2757,12 @@ static IMKickPCClientReq* defaultIMKickPCClientReqInstance = nil;
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasUserId) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.userId] forKey: @"userId"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
+}
 - (BOOL) isEqual:(id)other {
   if (other == self) {
     return YES;
@@ -2740,29 +2787,26 @@ static IMKickPCClientReq* defaultIMKickPCClientReqInstance = nil;
 @end
 
 @interface IMKickPCClientReqBuilder()
-@property (strong) IMKickPCClientReq* result;
+@property (strong) IMKickPCClientReq* resultImkickPcclientReq;
 @end
 
 @implementation IMKickPCClientReqBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImkickPcclientReq;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMKickPCClientReq alloc] init];
+    self.resultImkickPcclientReq = [[IMKickPCClientReq alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImkickPcclientReq;
 }
 - (IMKickPCClientReqBuilder*) clear {
-  self.result = [[IMKickPCClientReq alloc] init];
+  self.resultImkickPcclientReq = [[IMKickPCClientReq alloc] init];
   return self;
 }
 - (IMKickPCClientReqBuilder*) clone {
-  return [IMKickPCClientReq builderWithPrototype:result];
+  return [IMKickPCClientReq builderWithPrototype:resultImkickPcclientReq];
 }
 - (IMKickPCClientReq*) defaultInstance {
   return [IMKickPCClientReq defaultInstance];
@@ -2772,8 +2816,8 @@ static IMKickPCClientReq* defaultIMKickPCClientReqInstance = nil;
   return [self buildPartial];
 }
 - (IMKickPCClientReq*) buildPartial {
-  IMKickPCClientReq* returnMe = result;
-  self.result = nil;
+  IMKickPCClientReq* returnMe = resultImkickPcclientReq;
+  self.resultImkickPcclientReq = nil;
   return returnMe;
 }
 - (IMKickPCClientReqBuilder*) mergeFrom:(IMKickPCClientReq*) other {
@@ -2812,19 +2856,19 @@ static IMKickPCClientReq* defaultIMKickPCClientReqInstance = nil;
   }
 }
 - (BOOL) hasUserId {
-  return result.hasUserId;
+  return resultImkickPcclientReq.hasUserId;
 }
 - (UInt32) userId {
-  return result.userId;
+  return resultImkickPcclientReq.userId;
 }
 - (IMKickPCClientReqBuilder*) setUserId:(UInt32) value {
-  result.hasUserId = YES;
-  result.userId = value;
+  resultImkickPcclientReq.hasUserId = YES;
+  resultImkickPcclientReq.userId = value;
   return self;
 }
 - (IMKickPCClientReqBuilder*) clearUserId {
-  result.hasUserId = NO;
-  result.userId = 0;
+  resultImkickPcclientReq.hasUserId = NO;
+  resultImkickPcclientReq.userId = 0;
   return self;
 }
 @end
@@ -2839,20 +2883,18 @@ static IMKickPCClientReq* defaultIMKickPCClientReqInstance = nil;
 - (BOOL) hasUserId {
   return !!hasUserId_;
 }
-- (void) setHasUserId:(BOOL) value_ {
-  hasUserId_ = !!value_;
+- (void) setHasUserId:(BOOL) _value_ {
+  hasUserId_ = !!_value_;
 }
 @synthesize userId;
 - (BOOL) hasResultCode {
   return !!hasResultCode_;
 }
-- (void) setHasResultCode:(BOOL) value_ {
-  hasResultCode_ = !!value_;
+- (void) setHasResultCode:(BOOL) _value_ {
+  hasResultCode_ = !!_value_;
 }
 @synthesize resultCode;
-- (void) dealloc {
-}
-- (id) init {
+- (instancetype) init {
   if ((self = [super init])) {
     self.userId = 0;
     self.resultCode = 0;
@@ -2865,10 +2907,10 @@ static IMKickPCClientRsp* defaultIMKickPCClientRspInstance = nil;
     defaultIMKickPCClientRspInstance = [[IMKickPCClientRsp alloc] init];
   }
 }
-+ (IMKickPCClientRsp*) defaultInstance {
++ (instancetype) defaultInstance {
   return defaultIMKickPCClientRspInstance;
 }
-- (IMKickPCClientRsp*) defaultInstance {
+- (instancetype) defaultInstance {
   return defaultIMKickPCClientRspInstance;
 }
 - (BOOL) isInitialized {
@@ -2945,6 +2987,15 @@ static IMKickPCClientRsp* defaultIMKickPCClientRspInstance = nil;
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
+- (void) storeInDictionary:(NSMutableDictionary *)dictionary {
+  if (self.hasUserId) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.userId] forKey: @"userId"];
+  }
+  if (self.hasResultCode) {
+    [dictionary setObject: [NSNumber numberWithInteger:self.resultCode] forKey: @"resultCode"];
+  }
+  [self.unknownFields storeInDictionary:dictionary];
+}
 - (BOOL) isEqual:(id)other {
   if (other == self) {
     return YES;
@@ -2974,29 +3025,26 @@ static IMKickPCClientRsp* defaultIMKickPCClientRspInstance = nil;
 @end
 
 @interface IMKickPCClientRspBuilder()
-@property (strong) IMKickPCClientRsp* result;
+@property (strong) IMKickPCClientRsp* resultImkickPcclientRsp;
 @end
 
 @implementation IMKickPCClientRspBuilder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-}
-- (id) init {
+@synthesize resultImkickPcclientRsp;
+- (instancetype) init {
   if ((self = [super init])) {
-    self.result = [[IMKickPCClientRsp alloc] init];
+    self.resultImkickPcclientRsp = [[IMKickPCClientRsp alloc] init];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
-  return result;
+  return resultImkickPcclientRsp;
 }
 - (IMKickPCClientRspBuilder*) clear {
-  self.result = [[IMKickPCClientRsp alloc] init];
+  self.resultImkickPcclientRsp = [[IMKickPCClientRsp alloc] init];
   return self;
 }
 - (IMKickPCClientRspBuilder*) clone {
-  return [IMKickPCClientRsp builderWithPrototype:result];
+  return [IMKickPCClientRsp builderWithPrototype:resultImkickPcclientRsp];
 }
 - (IMKickPCClientRsp*) defaultInstance {
   return [IMKickPCClientRsp defaultInstance];
@@ -3006,8 +3054,8 @@ static IMKickPCClientRsp* defaultIMKickPCClientRspInstance = nil;
   return [self buildPartial];
 }
 - (IMKickPCClientRsp*) buildPartial {
-  IMKickPCClientRsp* returnMe = result;
-  self.result = nil;
+  IMKickPCClientRsp* returnMe = resultImkickPcclientRsp;
+  self.resultImkickPcclientRsp = nil;
   return returnMe;
 }
 - (IMKickPCClientRspBuilder*) mergeFrom:(IMKickPCClientRsp*) other {
@@ -3053,35 +3101,35 @@ static IMKickPCClientRsp* defaultIMKickPCClientRspInstance = nil;
   }
 }
 - (BOOL) hasUserId {
-  return result.hasUserId;
+  return resultImkickPcclientRsp.hasUserId;
 }
 - (UInt32) userId {
-  return result.userId;
+  return resultImkickPcclientRsp.userId;
 }
 - (IMKickPCClientRspBuilder*) setUserId:(UInt32) value {
-  result.hasUserId = YES;
-  result.userId = value;
+  resultImkickPcclientRsp.hasUserId = YES;
+  resultImkickPcclientRsp.userId = value;
   return self;
 }
 - (IMKickPCClientRspBuilder*) clearUserId {
-  result.hasUserId = NO;
-  result.userId = 0;
+  resultImkickPcclientRsp.hasUserId = NO;
+  resultImkickPcclientRsp.userId = 0;
   return self;
 }
 - (BOOL) hasResultCode {
-  return result.hasResultCode;
+  return resultImkickPcclientRsp.hasResultCode;
 }
 - (UInt32) resultCode {
-  return result.resultCode;
+  return resultImkickPcclientRsp.resultCode;
 }
 - (IMKickPCClientRspBuilder*) setResultCode:(UInt32) value {
-  result.hasResultCode = YES;
-  result.resultCode = value;
+  resultImkickPcclientRsp.hasResultCode = YES;
+  resultImkickPcclientRsp.resultCode = value;
   return self;
 }
 - (IMKickPCClientRspBuilder*) clearResultCode {
-  result.hasResultCode = NO;
-  result.resultCode = 0;
+  resultImkickPcclientRsp.hasResultCode = NO;
+  resultImkickPcclientRsp.resultCode = 0;
   return self;
 }
 @end

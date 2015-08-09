@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		248325FA30CEF6474B4D2247 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3694C69353B476CAF25370A1 /* libPods.a */; };
 		4503E2371B402486005A906A /* IM.BaseDefine.proto in Resources */ = {isa = PBXBuildFile; fileRef = 4503E2201B402485005A906A /* IM.BaseDefine.proto */; };
 		4503E2381B402486005A906A /* IM.Buddy.proto in Resources */ = {isa = PBXBuildFile; fileRef = 4503E2211B402485005A906A /* IM.Buddy.proto */; };
 		4503E2391B402486005A906A /* IM.File.proto in Resources */ = {isa = PBXBuildFile; fileRef = 4503E2221B402485005A906A /* IM.File.proto */; };
@@ -24,6 +25,8 @@
 		4503E2451B402486005A906A /* IMLogin.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4503E2321B402486005A906A /* IMLogin.pb.m */; };
 		4503E2461B402486005A906A /* IMMessage.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4503E2341B402486005A906A /* IMMessage.pb.m */; };
 		4503E2471B402486005A906A /* IMOther.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4503E2361B402486005A906A /* IMOther.pb.m */; };
+		4503E24A1B402EA4005A906A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4503E2491B402EA4005A906A /* Podfile */; };
+		4503E24C1B40395B005A906A /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 4503E24B1B40395B005A906A /* Podfile.lock */; };
 		4C0C0F0C1A314E060094CCD2 /* SessionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C0F0B1A314E060094CCD2 /* SessionModule.m */; };
 		4C12E7F51A77920A00F1DD54 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */; };
 		4C1CEEC81A3581160015C355 /* GetMessageQueueAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CEEC71A3581160015C355 /* GetMessageQueueAPI.m */; };
@@ -394,6 +397,7 @@
 
 /* Begin PBXFileReference section */
 		19B78DA8A3707C0C507EF626 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3694C69353B476CAF25370A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4503E2201B402485005A906A /* IM.BaseDefine.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = IM.BaseDefine.proto; path = protobuf/IM.BaseDefine.proto; sourceTree = "<group>"; };
 		4503E2211B402485005A906A /* IM.Buddy.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = IM.Buddy.proto; path = protobuf/IM.Buddy.proto; sourceTree = "<group>"; };
 		4503E2221B402485005A906A /* IM.File.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = IM.File.proto; path = protobuf/IM.File.proto; sourceTree = "<group>"; };
@@ -417,6 +421,8 @@
 		4503E2341B402486005A906A /* IMMessage.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMMessage.pb.m; path = protobuf/IMMessage.pb.m; sourceTree = "<group>"; };
 		4503E2351B402486005A906A /* IMOther.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMOther.pb.h; path = protobuf/IMOther.pb.h; sourceTree = "<group>"; };
 		4503E2361B402486005A906A /* IMOther.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMOther.pb.m; path = protobuf/IMOther.pb.m; sourceTree = "<group>"; };
+		4503E2491B402EA4005A906A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		4503E24B1B40395B005A906A /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		4C0C0F0A1A314E060094CCD2 /* SessionModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionModule.h; sourceTree = "<group>"; };
 		4C0C0F0B1A314E060094CCD2 /* SessionModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionModule.m; sourceTree = "<group>"; };
 		4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
@@ -1022,6 +1028,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C92D7CD1ABA67EC00709CC6 /* libsecurity.a in Frameworks */,
+				248325FA30CEF6474B4D2247 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1318,6 +1325,14 @@
 				4CA6CE101A2C1F6E00405BB6 /* x@2x.png */,
 			);
 			name = resources;
+			sourceTree = "<group>";
+		};
+		4DBDB269A968079D2E3DD7E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3694C69353B476CAF25370A1 /* libPods.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A8257D727D24C0F620C5BCBC /* Pods */ = {
@@ -2041,6 +2056,8 @@
 		C4EBA72B192F279100B72723 = {
 			isa = PBXGroup;
 			children = (
+				4503E24B1B40395B005A906A /* Podfile.lock */,
+				4503E2491B402EA4005A906A /* Podfile */,
 				4503E2481B402492005A906A /* protobuf */,
 				4C6BBC1D1A7F532F0028B892 /* Security */,
 				4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */,
@@ -2053,6 +2070,7 @@
 				C493DDCA1962A50900B39106 /* TeamTalk */,
 				4C1367ED194AF9440094E87D /* appbundle */,
 				A8257D727D24C0F620C5BCBC /* Pods */,
+				4DBDB269A968079D2E3DD7E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2133,6 +2151,7 @@
 				4CA6CE751A2C1F6F00405BB6 /* username.png in Resources */,
 				4CA6CE281A2C1F6E00405BB6 /* dd_image_send@2x.png in Resources */,
 				4503E2391B402486005A906A /* IM.File.proto in Resources */,
+				4503E24A1B402EA4005A906A /* Podfile in Resources */,
 				4C3A74D81A8C84C9009400A2 /* 226.gif in Resources */,
 				4CA6CE521A2C1F6E00405BB6 /* delete.png in Resources */,
 				4CA6CE171A2C1F6E00405BB6 /* contact.png in Resources */,
@@ -2182,6 +2201,7 @@
 				4CA6CE341A2C1F6E00405BB6 /* dd_press_to_say_normal@2x.png in Resources */,
 				4C3A74D01A8C84C9009400A2 /* 222.gif in Resources */,
 				4C3A74F11A8C84C9009400A2 /* 238@2x.gif in Resources */,
+				4503E24C1B40395B005A906A /* Podfile.lock in Resources */,
 				4C3A74ED1A8C84C9009400A2 /* 236@2x.gif in Resources */,
 				4CA6CE1D1A2C1F6E00405BB6 /* dd_album.png in Resources */,
 				4CA6CE641A2C1F6F00405BB6 /* myprofile.png in Resources */,
