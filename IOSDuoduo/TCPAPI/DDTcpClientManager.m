@@ -22,6 +22,7 @@
 - (void)p_handleEventEndEncounteredStream:(NSStream *)aStream;
 - (void)p_handleEventHasBytesAvailableStream:(NSStream *)aStream;
 - (void)p_handleEventHasSpaceAvailableStream:(NSStream *)aStream;
+- (BOOL)p_checkSendBuffer:(DDSendBuffer*)sendBuffer Length:(NSInteger)len; //luopeng 20150905
 @end
 
 @implementation DDTcpClientManager
@@ -103,12 +104,14 @@
         if (_noDataSent ==YES) {
             
             NSInteger len;
-            len = [_outStream write:[data mutableBytes] maxLength:[data length]];
+            len = [_outStream write:[data mutableBytes] maxLength:[data length]/4];
             _noDataSent = NO;
+            NSUInteger rlen = [data length] -len;
             DDLog(@"WRITE - Written directly to outStream len:%li", (long)len);
             if (len < [data length]) {
-                DDLog(@"WRITE - Creating a new buffer for remaining data len:%u", [data length] - len);
-                _lastSendBuffer = [DDSendBuffer dataWithNSData:[data subdataWithRange:NSMakeRange([data length]-len, [data length])]];
+                DDLog(@"WRITE - Creating a new buffer for remaining data len:%lu", (unsigned long)rlen);
+//                _lastSendBuffer = [DDSendBuffer dataWithNSData:[data subdataWithRange:NSMakeRange([data length]-len, [data length])]];     //fix tt bug
+                _lastSendBuffer = [DDSendBuffer dataWithNSData:[data subdataWithRange:NSMakeRange(len, [data length]-len)]]; //luopeng 20150904
                 [_sendBuffers addObject:_lastSendBuffer];
                 
             }
@@ -120,7 +123,8 @@
             NSInteger newDataLength;
             lastSendBufferLength = [_lastSendBuffer length];
             newDataLength = [data length];
-            if (lastSendBufferLength<1024) {
+            //if (lastSendBufferLength<1024) {
+            if (lastSendBufferLength + newDataLength) { //luopeng 20150904
                 DDLog(@"WRITE - Have a buffer with enough space, appending data to it");
                 [_lastSendBuffer appendData:data];
                 return;
@@ -173,6 +177,22 @@
     }
 }
 
+//luopeng 20150905
+- (BOOL)p_checkSendBuffer:(DDSendBuffer*)sendBuffer Length:(NSInteger)len
+{
+    if (!len) {
+        if (sendBuffer == _lastSendBuffer) {
+            _lastSendBuffer = nil;
+            _noDataSent = YES;
+        }
+        [_sendBuffers removeObjectAtIndex:0];
+        DDLog(@"WRITE - No data to send");
+        
+        return YES;
+    }
+    return NO;
+}
+
 - (void)p_handleEventHasSpaceAvailableStream:(NSStream *)aStream
 {
     [_sendLock lock];
@@ -182,58 +202,24 @@
         if (![_sendBuffers count]) {
             DDLog(@"WRITE - No data to send");
             _noDataSent = YES;
-            
             return;
         }
         
         DDSendBuffer *sendBuffer = [_sendBuffers objectAtIndex:0];
+        NSInteger blen = [sendBuffer length];
+        if ([self p_checkSendBuffer:sendBuffer Length:blen]) return;
         
-        NSInteger sendBufferLength = [sendBuffer length];
-        
-        if (!sendBufferLength) {
-            if (sendBuffer == _lastSendBuffer) {
-                _lastSendBuffer = nil;
-            }
-            
-            [_sendBuffers removeObjectAtIndex:0];
-            
-            DDLog(@"WRITE - No data to send");
-            
-            _noDataSent = YES;
-            
-            return;
-        }
-        
-        NSInteger len = ((sendBufferLength - [sendBuffer sendPos] >= 1024) ? 1024 : (sendBufferLength - [sendBuffer sendPos]));
-        if (!len) {
-            if (sendBuffer == _lastSendBuffer) {
-                _lastSendBuffer = nil;
-            }
-            
-            [_sendBuffers removeObjectAtIndex:0];
-            
-            DDLog(@"WRITE - No data to send");
-            
-            _noDataSent = YES;
-            
-            return;
-        }
+        NSInteger bpos = [sendBuffer sendPos];
+        NSInteger rlen = ((blen - bpos >= 1024) ? 1024 : (blen - bpos));
+        if ([self p_checkSendBuffer:sendBuffer Length:rlen]) return;
         
         //			DDLog(@"write %ld bytes", len);
-        len = [_outStream write:((const uint8_t *)[sendBuffer mutableBytes] + [sendBuffer sendPos]) maxLength:len];
-        DDLog(@"WRITE - Written directly to outStream len:%lid", (long)len);
-        [sendBuffer consumeData:len];
-        
-        if (![sendBuffer length]) {
-            if (sendBuffer == _lastSendBuffer) {
-                _lastSendBuffer = nil;
-            }
-            
-            [_sendBuffers removeObjectAtIndex:0];
-        }
+        NSInteger slen = [_outStream write:((const uint8_t *)[sendBuffer mutableBytes] + [sendBuffer sendPos]) maxLength:rlen];
+        DDLog(@"WRITE - Written directly to outStream len:%lid", (long)slen);
+        [sendBuffer consumeData:slen];
+        if ([self p_checkSendBuffer:sendBuffer Length:[sendBuffer length]]) return;
         
         _noDataSent = NO;
-        
         
         return;
     }

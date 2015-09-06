@@ -24,8 +24,12 @@
     self = [super init];
     if (self)
     {
-        _serialQueue = dispatch_queue_create("com.mogujie.SundriesSerial", NULL);
-        _parallelQueue = dispatch_queue_create("com.mogujie.SundriesParallel", NULL);
+//        _serialQueue = dispatch_queue_create("com.mogujie.SundriesSerial", NULL);
+        _serialQueue = dispatch_queue_create("com.mogujie.SundriesSerial", DISPATCH_QUEUE_SERIAL); //luopeng 20150906
+        
+        
+//        _parallelQueue = dispatch_queue_create("com.mogujie.SundriesParallel", NULL);
+        _parallelQueue = dispatch_queue_create("com.mogujie.SundriesParallel", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }

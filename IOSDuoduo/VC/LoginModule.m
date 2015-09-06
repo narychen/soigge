@@ -22,8 +22,8 @@
 #import "DBManager.h"
 @interface LoginModule(privateAPI)
 
-- (void)p_loadAfterHttpServerWithToken:(NSString*)token userID:(NSString*)userID dao:(NSString*)dao password:(NSString*)password uname:(NSString*)uname success:(void(^)(DDUserEntity* loginedUser))success failure:(void(^)(NSString* error))failure;
-- (void)reloginAllFlowSuccess:(void(^)())success failure:(void(^)())failure;
+//- (void)p_loadAfterHttpServerWithToken:(NSString*)token userID:(NSString*)userID dao:(NSString*)dao password:(NSString*)password uname:(NSString*)uname success:(void(^)(DDUserEntity* loginedUser))success failure:(void(^)(NSString* error))failure;
+//- (void)reloginAllFlowSuccess:(void(^)())success failure:(void(^)())failure;
 
 @end
 
@@ -103,7 +103,7 @@
                 failure(@"连接消息服务器失败");
             }];
         }else if(code == 1){
-//            failure(@"xxxxx连接消息服务器失败");
+//            failure(@"连接消息服务器失败");
             DDLog(@"%@", msg);
             failure(msg);
         }

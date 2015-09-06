@@ -423,6 +423,7 @@
 		4503E2361B402486005A906A /* IMOther.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMOther.pb.m; path = protobuf/IMOther.pb.m; sourceTree = "<group>"; };
 		4503E2491B402EA4005A906A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4503E24B1B40395B005A906A /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		4508BF891B88850F00C15531 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		4C0C0F0A1A314E060094CCD2 /* SessionModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionModule.h; sourceTree = "<group>"; };
 		4C0C0F0B1A314E060094CCD2 /* SessionModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionModule.m; sourceTree = "<group>"; };
 		4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
@@ -2056,6 +2057,7 @@
 		C4EBA72B192F279100B72723 = {
 			isa = PBXGroup;
 			children = (
+				4508BF891B88850F00C15531 /* MyPlayground.playground */,
 				4503E24B1B40395B005A906A /* Podfile.lock */,
 				4503E2491B402EA4005A906A /* Podfile */,
 				4503E2481B402492005A906A /* protobuf */,

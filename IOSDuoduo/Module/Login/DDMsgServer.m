@@ -59,6 +59,7 @@ typedef void(^CheckSuccess)(id object);
                 if (response)
                 {
                     NSString *resultString =response[@"resultString"];
+                    DDLog(@"login response = %@", response);
                     if (resultString == nil) {
                          success(response);
                     }

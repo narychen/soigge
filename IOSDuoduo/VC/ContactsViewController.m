@@ -374,37 +374,39 @@
     if (cell == nil) {
         cell = [[DDContactsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-        if (self.selectIndex == 0) {
-            if (indexPath.section == 0) {
+    if (self.selectIndex == 0) {
+        if (indexPath.section == 0) {
 
-                GroupEntity *group = [self.groups objectAtIndex:indexPath.row];
-                 [cell setCellContent:nil Name:group.name Cname:@""];
-                [cell setGroupAvatar:group];
-                [cell.button setEnabled:NO];
-            }
-            else
-            {
-                NSString *keyStr = [[self allKeys] objectAtIndex:indexPath.section-1];
-                NSArray *userArray =[self.items objectForKey:keyStr];
-                DDUserEntity *user = [userArray objectAtIndex:indexPath.row];
-         
-                [cell setCellContent:[user getAvatarUrl] Name:user.nick Cname:user.name];
-                cell.button.tag=indexPath.row;
-                [cell.button setTitle:keyStr forState:UIControlStateNormal];
-                [cell.button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-                [cell.button addTarget:self action:@selector(showActions:) forControlEvents:UIControlEventTouchUpInside];
-            }
-        }else
+            GroupEntity *group = [self.groups objectAtIndex:indexPath.row];
+             [cell setCellContent:nil Name:group.name Cname:@""];
+            [cell setGroupAvatar:group];
+            [cell.button setEnabled:NO];
+        }
+        else
         {
-            NSString *keyStr = [[self allKeys] objectAtIndex:indexPath.section];
-            NSArray *userArray =[self.department objectForKey:keyStr];
+            NSString *keyStr = [[self allKeys] objectAtIndex:indexPath.section-1];
+            NSArray *userArray =[self.items objectForKey:keyStr];
             DDUserEntity *user = [userArray objectAtIndex:indexPath.row];
-            [cell setCellContent:[user getAvatarUrl] Name:user.nick Cname:user.name];
+     
+//            [cell setCellContent:[user getAvatarUrl] Name:user.nick Cname:user.name];
+            [cell setCellContent:[user getAvatarUrl] Name:user.name Cname:user.name];//luopeng 20150904
             cell.button.tag=indexPath.row;
             [cell.button setTitle:keyStr forState:UIControlStateNormal];
             [cell.button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
             [cell.button addTarget:self action:@selector(showActions:) forControlEvents:UIControlEventTouchUpInside];
         }
+    }else
+    {
+        NSString *keyStr = [[self allKeys] objectAtIndex:indexPath.section];
+        NSArray *userArray =[self.department objectForKey:keyStr];
+        DDUserEntity *user = [userArray objectAtIndex:indexPath.row];
+    //            [cell setCellContent:[user getAvatarUrl] Name:user.nick Cname:user.name];
+        [cell setCellContent:[user getAvatarUrl] Name:user.name Cname:user.name]; //luopeng 20150904
+        cell.button.tag=indexPath.row;
+        [cell.button setTitle:keyStr forState:UIControlStateNormal];
+        [cell.button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [cell.button addTarget:self action:@selector(showActions:) forControlEvents:UIControlEventTouchUpInside];
+    }
     
     return cell;
 }

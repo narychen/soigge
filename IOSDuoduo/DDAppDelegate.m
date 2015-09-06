@@ -33,9 +33,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [DDAppDelegate logSomeInfo];
   
     [DDClientStateMaintenanceManager shareInstance];
+    
+//    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(logClientState:) userInfo:nil repeats:YES];
+    
      [[NSURLCache sharedURLCache] removeAllCachedResponses];
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         // for iOS 8
@@ -51,6 +54,7 @@
         [[UINavigationBar appearance] setTranslucent:YES];
     }
     [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -90,6 +94,22 @@
     
     return font;
     
+}
+
++(void)logSomeInfo
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSString *documentDir = [paths objectAtIndex:0];
+    DDLog("%@", documentDir);
+    
+}
+
+-(void) logClientState:(NSTimer*)timer
+{
+    DDLog(@"userState = %d", (int)[DDClientState shareInstance].userState);
+    DDLog(@"socketState = %d", (int)[DDClientState shareInstance].socketState);
+    DDLog(@"networkState = %d", (int)[DDClientState shareInstance].networkState);
+//    DDLog(@"DDSocketLinkLoginServer=%lu", (unsigned long)DDSocketLinkLoginServer);
 }
 
 

@@ -27,25 +27,27 @@
 @property(assign)CGPoint defaultCenter;
 @end
 
+
 @implementation LoginViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//{
+//    NSLog(@"init with nib %@", nibNameOrNil);
+//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"ipaddress"] == nil) {
-        [defaults setObject:@"http://luopeng.net:8080/msg_server" forKey:@"ipaddress"];
-//        [defaults setObject:@"http://access.teamtalk.im:8080/msg_server" forKey:@"ipaddress"];
+        [defaults setObject:@"http://access.teamtalk.im:8080/msg_server" forKey:@"ipaddress"];
     }
+    [defaults setObject:@"http://yogedan.com:8080/msg_server" forKey:@"ipaddress"];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"]!=nil) {
         _userNameTextField.text =[[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     }
@@ -107,7 +109,12 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
+    
+    
 }
+
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

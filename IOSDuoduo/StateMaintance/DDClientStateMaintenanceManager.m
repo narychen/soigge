@@ -116,7 +116,7 @@ static NSInteger const reloginTimeinterval = 5;
                 [self p_stopHeartBeat];
                 break;
             case DDUserOffLine:
-                [RecentUsersViewController shareInstance].title=@"未连接";
+                [RecentUsersViewController shareInstance].title=@"**未连接";
                 [self p_stopCheckServerHeartBeat];
                 [self p_stopHeartBeat];
                 [self p_startRelogin];
@@ -127,7 +127,7 @@ static NSInteger const reloginTimeinterval = 5;
                 [self p_stopHeartBeat];
                 break;
             case DDUserOnline:
-                [RecentUsersViewController shareInstance].title=@"TeamTalk";
+                [RecentUsersViewController shareInstance].title=@"TeamTalk----";
                 [self p_startCheckServerHeartBeat];
                 [self p_startHeartBeat];
                 break;
