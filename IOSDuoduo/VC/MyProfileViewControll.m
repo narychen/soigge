@@ -5,7 +5,7 @@
 //  Created by Michael Scofield on 2014-07-15.
 //  Copyright (c) 2014 dujia. All rights reserved.
 //
-
+#import "DDAppDelegate.h"
 #import "MyProfileViewControll.h"
 #import "PublicProfileViewControll.h"
 #import "RuntimeStatus.h"
@@ -135,9 +135,17 @@
             
         }];
         [DDNotificationHelp postNotification:DDNotificationLogout userInfo:nil object:nil];
-        LoginViewController *login = [LoginViewController new];
+//        LoginViewController *login = [LoginViewController new];
+        LoginViewController *login = TheAppDel.loginViewController; //luopeng 20150911
         login.isRelogin=YES;
-        [self presentViewController:login animated:YES completion:^{
+//        [self presentViewController:login animated:YES completion:^{
+//            TheRuntime.user =nil;
+//            TheRuntime.userID =nil;
+//            [DDClientState shareInstance].userState = DDUserOffLineInitiative;
+//            [[DDTcpClientManager instance] disconnect];
+//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autologin"];
+//        }];
+        [TheAppDel.mainViewControll dismissViewControllerAnimated:YES completion:^{
             TheRuntime.user =nil;
             TheRuntime.userID =nil;
             [DDClientState shareInstance].userState = DDUserOffLineInitiative;

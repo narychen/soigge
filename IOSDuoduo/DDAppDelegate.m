@@ -65,6 +65,7 @@
     self.nv=self.mainViewControll.nv1;
     LoginViewController *login = [LoginViewController new];
     self.window.rootViewController = login;
+//    TheAppDel.loginViewController = login;
     NSDictionary *pushDict = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if(pushDict)
     {
@@ -169,12 +170,12 @@
        NSString *dt = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *dn = [dt stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     TheRuntime.pushToken= [dn stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"token......%@",TheRuntime.pushToken);
+    DDLog(@"token......%@",TheRuntime.pushToken);
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSString *error_str = [NSString stringWithFormat: @"%@", error];
-    NSLog(@"Failed to get token, error:%@", error_str);
+    DDLog(@"Failed to get token, error:%@", error_str);
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     
@@ -189,7 +190,7 @@
     NSInteger from_id =[[info safeObjectForKey:@"from_id"] integerValue];
     SessionType type = (SessionType)[[info safeObjectForKey:@"msg_type"] integerValue];
     NSInteger group_id =[[info safeObjectForKey:@"group_id"] integerValue];
-    NSLog(@"推送消息%@",info);
+    DDLog(@"推送消息%@",info);
     if (from_id) {
         NSInteger sessionId = type==1?from_id:group_id;
         SessionEntity *session = [[SessionEntity alloc] initWithSessionID:[TheRuntime changeOriginalToLocalID:sessionId SessionType:type] type:type] ;
@@ -204,7 +205,7 @@
             
         }
            }
-    NSLog(@"收到推送消息:%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+    DDLog(@"收到推送消息:%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
     
 }
 

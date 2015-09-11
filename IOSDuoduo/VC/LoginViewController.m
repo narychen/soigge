@@ -25,10 +25,14 @@
 #import "MBProgressHUD.h"
 @interface LoginViewController ()
 @property(assign)CGPoint defaultCenter;
+@property(assign)CGFloat defaultCenter_y;
 @end
 
+static NSInteger _upCount = 0;
 
-@implementation LoginViewController
+@implementation LoginViewController {
+    
+}
 
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 //{
@@ -118,14 +122,20 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.defaultCenter=self.view.center;
+    self.defaultCenter_y = self.view.center.y;
     
 }
 -(void)handleWillShowKeyboard
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    self.view.center=CGPointMake(self.view.center.x, self.defaultCenter.y-(IPHONE4?120:40));
+
+//    self.view.center=CGPointMake(self.view.center.x, self.defaultCenter.y-(IPHONE4?120:40));
+    if ( _upCount == 0 ) {
+        self.view.center = CGPointMake(self.view.center.x, self.view.center.y - (IPHONE4?120:40));
+        _upCount++;
+    }
+
     [UIView commitAnimations];
 }
 
@@ -133,7 +143,11 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.4 animations:^{
-            self.view.center=self.defaultCenter;
+            if (_upCount == 1) {
+                self.view.center = CGPointMake(self.view.center.x, self.view.center.y + (IPHONE4?120:40));
+                _upCount--;
+            }
+            
         }];
     });
 }
@@ -167,7 +181,10 @@
     HUD.labelText = @"正在登录";
     SCLAlertView *alert = [SCLAlertView new];
     [[LoginModule instance] loginWithUsername:userName password:password success:^(DDUserEntity *user) {
+        
         [self.userLoginBtn setEnabled:YES];
+        [HUD removeFromSuperview];//luopeng 20150911
+        
         if (user) {
             TheRuntime.user=user ;
             [TheRuntime updateData];
@@ -192,6 +209,8 @@
             }
             
         }
+
+        
     } failure:^(NSString *error) {
         
         [self.userLoginBtn setEnabled:YES];

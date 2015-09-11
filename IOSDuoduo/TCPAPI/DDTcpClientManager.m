@@ -186,7 +186,7 @@
             _noDataSent = YES;
         }
         [_sendBuffers removeObjectAtIndex:0];
-        DDLog(@"WRITE - No data to send");
+//        DDLog(@"WRITE - No data to send");
         
         return YES;
     }
@@ -215,7 +215,7 @@
         
         //			DDLog(@"write %ld bytes", len);
         NSInteger slen = [_outStream write:((const uint8_t *)[sendBuffer mutableBytes] + [sendBuffer sendPos]) maxLength:rlen];
-        DDLog(@"WRITE - Written directly to outStream len:%lid", (long)slen);
+        DDLog(@"WRITE - Written directly to outStream len:%ldl", (long)slen);
         [sendBuffer consumeData:slen];
         if ([self p_checkSendBuffer:sendBuffer Length:[sendBuffer length]]) return;
         
@@ -274,7 +274,7 @@
                 
                 uint32_t pduLen = [inputData readInt];
                 if (pduLen > (uint32_t)[_receiveBuffer length]) {
-                    DDLog(@"not enough data received");
+//                    DDLog(@"not enough data received");
                     break;
                 }
                 

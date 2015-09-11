@@ -1066,6 +1066,16 @@
 			name = protobuf;
 			sourceTree = "<group>";
 		};
+		45F7A8EC1BA311990006B8C1 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				4CA6CE7D1A2C1FBA00405BB6 /* LoginViewController.xib */,
+				4CA6CE791A2C1FA700405BB6 /* LoginViewController.h */,
+				4CA6CE7A1A2C1FA700405BB6 /* LoginViewController.m */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
 		4C0C0F091A314DF00094CCD2 /* Session */ = {
 			isa = PBXGroup;
 			children = (
@@ -1351,9 +1361,6 @@
 				4C77C28E1A8852F8001E5885 /* ScanQRCodePage.h */,
 				4C77C28F1A8852F8001E5885 /* ScanQRCodePage.m */,
 				4C77C2901A8852F8001E5885 /* ScanQRCodePage.xib */,
-				4CA6CE7D1A2C1FBA00405BB6 /* LoginViewController.xib */,
-				4CA6CE791A2C1FA700405BB6 /* LoginViewController.h */,
-				4CA6CE7A1A2C1FA700405BB6 /* LoginViewController.m */,
 				C485E8E419F78D800061DAFE /* FinderViewController.h */,
 				C485E8E519F78D800061DAFE /* FinderViewController.m */,
 				C485E8E619F78D800061DAFE /* FinderViewController.xib */,
@@ -1368,6 +1375,7 @@
 		C493DDCA1962A50900B39106 /* TeamTalk */ = {
 			isa = PBXGroup;
 			children = (
+				C493DEDE1962A50900B39106 /* VC */,
 				4C3A75101A8C865A009400A2 /* DDAppDelegate.h */,
 				4C3A75111A8C865A009400A2 /* DDAppDelegate.m */,
 				4C3A750D1A8C8650009400A2 /* TTHttpsRequest.h */,
@@ -1385,7 +1393,6 @@
 				C493DE611962A50900B39106 /* TCPAPI */,
 				C493DEA01962A50900B39106 /* ThridFramework */,
 				C493DEC71962A50900B39106 /* ToRemove */,
-				C493DEDE1962A50900B39106 /* VC */,
 				C493DF2C1962A50900B39106 /* Voice */,
 				C493DFB51962A50900B39106 /* XLog.h */,
 				4C39B7FD1974D6E4001B4AEF /* Images.xcassets */,
@@ -1711,6 +1718,7 @@
 		C493DEDE1962A50900B39106 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				45F7A8EC1BA311990006B8C1 /* login */,
 				4C3A75061A8C860F009400A2 /* RootViewController.h */,
 				4C3A75071A8C860F009400A2 /* RootViewController.m */,
 				C485E8E319F78D380061DAFE /* Finder */,
