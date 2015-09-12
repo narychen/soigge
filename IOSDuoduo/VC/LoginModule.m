@@ -37,6 +37,7 @@
     NSInteger _port;
     BOOL _relogining;
 }
+
 + (instancetype)instance
 {
     static LoginModule *g_LoginManager;

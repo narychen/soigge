@@ -23,6 +23,7 @@
 #import "DDDatabaseUtil.h"
 #import "DDGroupModule.h"
 #import "MBProgressHUD.h"
+#import "DDUtil.h"
 @interface LoginViewController ()
 @property(assign)CGPoint defaultCenter;
 @property(assign)CGFloat defaultCenter_y;
@@ -47,6 +48,7 @@ static NSInteger _upCount = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"ipaddress"] == nil) {
         [defaults setObject:@"http://access.teamtalk.im:8080/msg_server" forKey:@"ipaddress"];
@@ -79,23 +81,28 @@ static NSInteger _upCount = 0;
     
     self.userNameTextField.leftViewMode=UITextFieldViewModeAlways;
     self.userPassTextField.leftViewMode=UITextFieldViewModeAlways;
+    
     UIImageView *usernameLeftView = [[UIImageView alloc] init];
     usernameLeftView.contentMode = UIViewContentModeCenter;
     usernameLeftView.frame=CGRectMake(0, 0, 18, 22.5);
     UIImageView *pwdLeftView = [[UIImageView alloc] init];
     pwdLeftView.contentMode = UIViewContentModeCenter;
     pwdLeftView.frame=CGRectMake(0, 0,18, 22.5);
+    
     self.userNameTextField.leftView=usernameLeftView;
     self.userPassTextField.leftView=pwdLeftView;
-    [self.userNameTextField.layer setBorderColor:RGB(211, 211, 211).CGColor];
+    
+    [self.userNameTextField.layer setBorderColor:RGB(25, 139, 255).CGColor];
     [self.userNameTextField.layer setBorderWidth:0.5];
     [self.userNameTextField.layer setCornerRadius:4];
-    [self.userPassTextField.layer setBorderColor:RGB(211, 211, 211).CGColor];
+    [self.userPassTextField.layer setBorderColor:RGB(25, 139, 255).CGColor];
     [self.userPassTextField.layer setBorderWidth:0.5];
     [self.userPassTextField.layer setCornerRadius:4];
     
-    [self.userLoginBtn.layer setCornerRadius:8];
-    [_userRegisterBtn.layer setCornerRadius:8];
+    self.userNameTextField.delegate = self;
+    self.userPassTextField.delegate = self;
+    
+    [self.userLoginBtn.layer setCornerRadius:4];
     
     // 设置用户名
     
@@ -113,10 +120,16 @@ static NSInteger _upCount = 0;
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tap.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap];
     
 }
 
+- (void)keyboardHide:(UITapGestureRecognizer*)tap {
+    [_userNameTextField resignFirstResponder];
+    [_userPassTextField resignFirstResponder];
+}
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -125,6 +138,7 @@ static NSInteger _upCount = 0;
     self.defaultCenter_y = self.view.center.y;
     
 }
+
 -(void)handleWillShowKeyboard
 {
     [UIView beginAnimations:nil context:NULL];
@@ -157,11 +171,6 @@ static NSInteger _upCount = 0;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
--(IBAction)hiddenKeyboard:(id)sender
-{
-    [_userNameTextField resignFirstResponder];
-    [_userPassTextField resignFirstResponder];
 }
 
 - (IBAction)login:(UIButton*)button
@@ -196,17 +205,13 @@ static NSInteger _upCount = 0;
                 }];
             }
             if (self.isRelogin) {
-                TheAppDel.mainViewControll=nil;
-                TheAppDel.window.rootViewController=[MainViewControll new];
-                [self dismissViewControllerAnimated:YES completion:^{
-                    
-                }];
-            }else{
-                [DDGroupModule instance];
-                [self presentViewController:TheAppDel.mainViewControll animated:YES completion:^{
-                    
-                }];
+//                [DDGroupModule instance];
+                TheAppDel.mainViewControll = [MainViewControll new];
+                
             }
+            [DDUtil viewRippleTransitionWithDuration:1.25 forView:TheAppDel.window trans:^{
+                [self presentViewController:TheAppDel.mainViewControll animated:YES completion:^{}];
+            }];
             
         }
 
@@ -221,12 +226,16 @@ static NSInteger _upCount = 0;
     }];
     
 }
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     [self login:nil];
     return YES;
 }
+
+
 -(IBAction)showEditServerAddress:(id)sender
 {
     SCLAlertView *alert = [SCLAlertView new];
@@ -240,19 +249,15 @@ static NSInteger _upCount = 0;
 }
 
 
-- (IBAction)registerUser:(UIButton *)sender{
-    [self.userRegisterBtn setEnabled:NO];
-    NSString* userName = _userNameTextField.text;
-    NSString* password = _userPassTextField.text;
-    if (userName.length ==0 || password.length == 0) {
-        [self.userRegisterBtn setEnabled:YES];
-        return;
-    }
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:HUD];
-    [HUD show:YES];
-    HUD.dimBackground = YES;
-    HUD.labelText = @"正在注册";
-    [self.userRegisterBtn setEnabled:YES];
+
+
+- (IBAction)loginOrRegAction:(id)sender {
+    
+    [DDUtil viewRippleTransitionWithDuration:1.25 forView:TheAppDel.window trans:^{
+        TheAppDel.window.rootViewController = TheAppDel.regViewController;
+    }];
+    self.loginOrReg.selectedSegmentIndex = 0;
+    [self.loginOrReg setNeedsDisplay];
+    
 }
 @end

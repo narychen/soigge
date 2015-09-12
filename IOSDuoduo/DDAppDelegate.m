@@ -62,17 +62,18 @@
     [RuntimeStatus instance];
     
     self.mainViewControll = [MainViewControll new];
-    self.nv=self.mainViewControll.nv1;
-    LoginViewController *login = [LoginViewController new];
-    self.window.rootViewController = login;
-//    TheAppDel.loginViewController = login;
+    self.nv = self.mainViewControll.nv1;
+    
+    self.loginViewController = [LoginViewController new];
+    self.regViewController = [RegViewController new];
+    
+    self.window.rootViewController = self.loginViewController;
+
     NSDictionary *pushDict = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(pushDict)
-    {
+    if(pushDict) {
         [self application:application didReceiveRemoteNotification:pushDict];
     }
 
-//    self.window.rootViewController = login;
     [self.window makeKeyAndVisible];
   //  [[self class] installCustomFont];
     return YES;

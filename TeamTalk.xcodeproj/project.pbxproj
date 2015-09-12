@@ -27,6 +27,10 @@
 		4503E2471B402486005A906A /* IMOther.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4503E2361B402486005A906A /* IMOther.pb.m */; };
 		4503E24A1B402EA4005A906A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4503E2491B402EA4005A906A /* Podfile */; };
 		4503E24C1B40395B005A906A /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 4503E24B1B40395B005A906A /* Podfile.lock */; };
+		45FA11FD1BA3D028004C7086 /* DDUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA11FC1BA3D028004C7086 /* DDUtil.m */; };
+		45FA12011BA3FFE8004C7086 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA11FF1BA3FFE8004C7086 /* RegViewController.m */; };
+		45FA12021BA3FFE8004C7086 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FA12001BA3FFE8004C7086 /* RegViewController.xib */; };
+		45FA12041BA46A71004C7086 /* DDRegModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA12031BA46A71004C7086 /* DDRegModule.m */; };
 		4C0C0F0C1A314E060094CCD2 /* SessionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C0F0B1A314E060094CCD2 /* SessionModule.m */; };
 		4C12E7F51A77920A00F1DD54 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */; };
 		4C1CEEC81A3581160015C355 /* GetMessageQueueAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CEEC71A3581160015C355 /* GetMessageQueueAPI.m */; };
@@ -424,6 +428,13 @@
 		4503E2491B402EA4005A906A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4503E24B1B40395B005A906A /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		4508BF891B88850F00C15531 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		45FA11FB1BA3D00A004C7086 /* DDUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDUtil.h; sourceTree = "<group>"; };
+		45FA11FC1BA3D028004C7086 /* DDUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDUtil.m; sourceTree = "<group>"; };
+		45FA11FE1BA3FFE8004C7086 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
+		45FA11FF1BA3FFE8004C7086 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
+		45FA12001BA3FFE8004C7086 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
+		45FA12031BA46A71004C7086 /* DDRegModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDRegModule.m; sourceTree = "<group>"; };
+		45FA12051BA46A92004C7086 /* DDRegModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDRegModule.h; sourceTree = "<group>"; };
 		4C0C0F0A1A314E060094CCD2 /* SessionModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionModule.h; sourceTree = "<group>"; };
 		4C0C0F0B1A314E060094CCD2 /* SessionModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionModule.m; sourceTree = "<group>"; };
 		4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
@@ -874,8 +885,8 @@
 		C493DF131962A50900B39106 /* TouchDownGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchDownGestureRecognizer.m; sourceTree = "<group>"; };
 		C493DF141962A50900B39106 /* AlbumDetailsBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailsBottomBar.h; sourceTree = "<group>"; };
 		C493DF151962A50900B39106 /* AlbumDetailsBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumDetailsBottomBar.m; sourceTree = "<group>"; };
-		C493DF181962A50900B39106 /* LoginModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModule.h; sourceTree = "<group>"; };
-		C493DF191962A50900B39106 /* LoginModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModule.m; sourceTree = "<group>"; };
+		C493DF181962A50900B39106 /* LoginModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginModule.h; path = ../../VC/LoginModule.h; sourceTree = "<group>"; };
+		C493DF191962A50900B39106 /* LoginModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginModule.m; path = ../../VC/LoginModule.m; sourceTree = "<group>"; };
 		C493DF1D1962A50900B39106 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		C493DF1E1962A50900B39106 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		C493DF1F1962A50900B39106 /* PhotosCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosCache.h; sourceTree = "<group>"; };
@@ -1072,6 +1083,9 @@
 				4CA6CE7D1A2C1FBA00405BB6 /* LoginViewController.xib */,
 				4CA6CE791A2C1FA700405BB6 /* LoginViewController.h */,
 				4CA6CE7A1A2C1FA700405BB6 /* LoginViewController.m */,
+				45FA11FE1BA3FFE8004C7086 /* RegViewController.h */,
+				45FA11FF1BA3FFE8004C7086 /* RegViewController.m */,
+				45FA12001BA3FFE8004C7086 /* RegViewController.xib */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -1375,6 +1389,8 @@
 		C493DDCA1962A50900B39106 /* TeamTalk */ = {
 			isa = PBXGroup;
 			children = (
+				45FA11FB1BA3D00A004C7086 /* DDUtil.h */,
+				45FA11FC1BA3D028004C7086 /* DDUtil.m */,
 				C493DEDE1962A50900B39106 /* VC */,
 				4C3A75101A8C865A009400A2 /* DDAppDelegate.h */,
 				4C3A75111A8C865A009400A2 /* DDAppDelegate.m */,
@@ -1497,12 +1513,16 @@
 		C493DE041962A50900B39106 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				C493DF181962A50900B39106 /* LoginModule.h */,
+				C493DF191962A50900B39106 /* LoginModule.m */,
 				C493DE051962A50900B39106 /* DDHttpServer.h */,
 				C493DE061962A50900B39106 /* DDHttpServer.m */,
 				C493DE0B1962A50900B39106 /* DDMsgServer.h */,
 				C493DE0C1962A50900B39106 /* DDMsgServer.m */,
 				C493DE0D1962A50900B39106 /* DDTcpServer.h */,
 				C493DE0E1962A50900B39106 /* DDTcpServer.m */,
+				45FA12031BA46A71004C7086 /* DDRegModule.m */,
+				45FA12051BA46A92004C7086 /* DDRegModule.h */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1740,8 +1760,6 @@
 				C493DEDF1962A50900B39106 /* Chatting */,
 				C493DF141962A50900B39106 /* AlbumDetailsBottomBar.h */,
 				C493DF151962A50900B39106 /* AlbumDetailsBottomBar.m */,
-				C493DF181962A50900B39106 /* LoginModule.h */,
-				C493DF191962A50900B39106 /* LoginModule.m */,
 				C493DF1D1962A50900B39106 /* Photo.h */,
 				C493DF1E1962A50900B39106 /* Photo.m */,
 				C493DF1F1962A50900B39106 /* PhotosCache.h */,
@@ -2152,6 +2170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C3A74D21A8C84C9009400A2 /* 223.gif in Resources */,
+				45FA12021BA3FFE8004C7086 /* RegViewController.xib in Resources */,
 				4CA6CE7E1A2C1FBA00405BB6 /* LoginViewController.xib in Resources */,
 				4CA6CE651A2C1F6F00405BB6 /* myprofile@2x.png in Resources */,
 				4C3A74D41A8C84C9009400A2 /* 224.gif in Resources */,
@@ -2380,6 +2399,7 @@
 				C493E08C1962A50A00B39106 /* lsp_tables_nb.c in Sources */,
 				C493E0381962A50A00B39106 /* AQGridViewUpdateInfo.m in Sources */,
 				C493DFB91962A50900B39106 /* NSIndexSet+AQIndexesOutsideSet.m in Sources */,
+				45FA11FD1BA3D028004C7086 /* DDUtil.m in Sources */,
 				C493E0161962A50A00B39106 /* std.m in Sources */,
 				4CB3D91D19F4B48200DC9B9D /* LogoutAPI.m in Sources */,
 				C493E0641962A50A00B39106 /* MenuImageView.m in Sources */,
@@ -2418,6 +2438,7 @@
 				4C77C2951A88CFEC001E5885 /* BlurView.m in Sources */,
 				C493E0891962A50A00B39106 /* kiss_fftr.c in Sources */,
 				C493E07A1962A50A00B39106 /* exc_10_32_table.c in Sources */,
+				45FA12041BA46A71004C7086 /* DDRegModule.m in Sources */,
 				C493E01A1962A50A00B39106 /* DDAPISchedule.m in Sources */,
 				4C837F38197F94F400C3D758 /* ContactsModule.m in Sources */,
 				C493E0791962A50A00B39106 /* exc_10_16_table.c in Sources */,
@@ -2566,6 +2587,7 @@
 				C493E01D1962A50A00B39106 /* DDReachability.m in Sources */,
 				4CB6AA0D198F7F550075BDB4 /* ChatEditTableViewCell.m in Sources */,
 				4C3A750C1A8C861E009400A2 /* RuntimeStatus.m in Sources */,
+				45FA12011BA3FFE8004C7086 /* RegViewController.m in Sources */,
 				C493DFB81962A50900B39106 /* NSDictionary+Safe.m in Sources */,
 				C493E0A21962A50A00B39106 /* Decapsulator.m in Sources */,
 				C493E0591962A50A00B39106 /* EmojiFaceView.m in Sources */,

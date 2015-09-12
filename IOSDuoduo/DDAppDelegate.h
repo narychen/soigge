@@ -10,11 +10,16 @@
 #import "std.h"
 #import "MainViewControll.h"
 #import "LoginViewController.h"
+#import "RegViewController.h"
+
 @interface DDAppDelegate : UIResponder <UIApplicationDelegate>
+
+
 @property (strong, nonatomic) UIWindow *window;
-@property(nonatomic,strong)UINavigationController *nv;
-@property(strong)MainViewControll* mainViewControll;
+@property(nonatomic,strong) UINavigationController *nv;
+@property(strong) MainViewControll* mainViewControll;
 @property(strong) LoginViewController* loginViewController;
+@property(strong) RegViewController* regViewController;
 
 @end
 #define TheApp           ([UIApplication sharedApplication])
