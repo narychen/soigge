@@ -10,6 +10,9 @@
 #import "MBProgressHUD.h"
 #import "DDUtil.h"
 #import "DDAppDelegate.h"
+#import "DDRegModule.h"
+#import "DDUserEntity.h"
+
 
 static NSInteger _upCount = 0;
 
@@ -165,6 +168,18 @@ static NSInteger _upCount = 0;
     [HUD show:YES];
     HUD.dimBackground = YES;
     HUD.labelText = @"正在注册";
+    
+    [[DDRegModule instance] registerWithUserinfo:self.userinfo success:^(DDUserEntity* user){
+        
+    } fail:^(NSString* err){
+        
+        [HUD removeFromSuperview];
+        SCLAlertView *alert = [SCLAlertView new];
+        [alert showError:self title:@"错误" subTitle:err closeButtonTitle:@"确定" duration:0];
+        
+    }];
+    
     [self.regButton setEnabled:YES];
+    
 }
 @end

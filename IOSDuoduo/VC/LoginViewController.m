@@ -188,7 +188,7 @@ static NSInteger _upCount = 0;
     [HUD show:YES];
     HUD.dimBackground = YES;
     HUD.labelText = @"正在登录";
-    SCLAlertView *alert = [SCLAlertView new];
+    
     [[LoginModule instance] loginWithUsername:userName password:password success:^(DDUserEntity *user) {
         
         [self.userLoginBtn setEnabled:YES];
@@ -220,9 +220,9 @@ static NSInteger _upCount = 0;
         
         [self.userLoginBtn setEnabled:YES];
         [HUD removeFromSuperview];
-        
+        SCLAlertView *alert = [SCLAlertView new];
         [alert showError:self title:@"错误" subTitle:error closeButtonTitle:@"确定" duration:0];
-        //[TheRuntime showAlertView:@" " Description:error];
+//        [TheRuntime showAlertView:@" " Description:error];
     }];
     
 }

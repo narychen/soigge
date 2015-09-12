@@ -23,6 +23,8 @@
 
 +(instancetype)instance;
 
+-(void)registerWithUserinfo:(NSDictionary*)userinfo success:(void(^)(DDUserEntity*))success fail:(void(^)(NSString*))fail;
+
 @end
 
 #endif
