@@ -30,4 +30,9 @@
  */
 - (void)offlineCompletion:(void(^)())completion;
 - (void)reloginSuccess:(void(^)())success failure:(void(^)(NSString* error))failure;
+- (void)p_loadAllUsersCompletion:(void(^)())completion;
+- (void)setLastLoginUserName:(NSString*)name;
+- (void)setLastLoginPassword:(NSString*)password;
+- (void)setRelogining:(BOOL)relogin;
+
 @end

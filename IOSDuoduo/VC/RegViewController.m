@@ -12,6 +12,7 @@
 #import "DDAppDelegate.h"
 #import "DDRegModule.h"
 #import "DDUserEntity.h"
+#import "SendPushTokenAPI.h"
 
 
 static NSInteger _upCount = 0;
@@ -142,7 +143,7 @@ static NSInteger _upCount = 0;
 
 - (IBAction)regOrLoginAction:(id)sender {
     [TheAppDel.loginViewController.view setNeedsDisplay];
-    [DDUtil viewRippleTransitionWithDuration:1.25 forView:TheAppDel.window trans:^{
+    [DDUtil viewFlipTransitionWithDuration:1.25 style:@"left" forView:TheAppDel.window trans:^{
         TheAppDel.window.rootViewController = TheAppDel.loginViewController;
     }];
     self.regOrLogin.selectedSegmentIndex = 1;
@@ -170,9 +171,32 @@ static NSInteger _upCount = 0;
     HUD.labelText = @"正在注册";
     
     [[DDRegModule instance] registerWithUserinfo:self.userinfo success:^(DDUserEntity* user){
+        DDLog("register successful");
+        [self.regButton setEnabled:YES];
+        [HUD removeFromSuperview];
+        
+        if (user) {
+            TheRuntime.user = user;
+            [TheRuntime updateData];
+        }
+        
+        if (TheRuntime.pushToken) {
+            SendPushTokenAPI *pushToken = [[SendPushTokenAPI alloc] init];
+            [pushToken requestWithObject:TheRuntime.pushToken Completion:^(id response, NSError *error) {
+                
+            }];
+        }
+        
+        [DDNotificationHelp postNotification:DDNotificationUserLoginSuccess userInfo:nil object:user];
+        
+        [DDUtil viewRippleTransitionWithDuration:1.25 forView:TheAppDel.window trans:^{
+            TheAppDel.window.rootViewController = TheAppDel.mainViewControll;
+        }];
+        
         
     } fail:^(NSString* err){
-        
+        DDLog("register failed");
+        [self.regButton setEnabled:YES];
         [HUD removeFromSuperview];
         SCLAlertView *alert = [SCLAlertView new];
         [alert showError:self title:@"错误" subTitle:err closeButtonTitle:@"确定" duration:0];

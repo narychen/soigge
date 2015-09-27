@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 dujia. All rights reserved.
 //
 
+#import "DDAppDelegate.h"
 #import "RecentUsersViewController.h"
 #import "RecentUserCell.h"
 #import "DDUserModule.h"
@@ -25,6 +26,7 @@
 #import "SessionModule.h"
 #import "BlurView.h"
 #import "LoginViewController.h"
+
 @interface RecentUsersViewController ()
 @property(strong)UISearchDisplayController * searchController;
 @property(strong)MBProgressHUD *hud;
@@ -54,19 +56,32 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveLoginFailureNotification:) name:DDNotificationUserLoginFailure object:nil];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveLoginNotification:) name:DDNotificationUserLoginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickOffUser:) name:@"KickOffUser" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:DDNotificationLogout object:nil];
     return self;
+}
+
+- (void)initNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"RefreshRecentData" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveReLoginSuccessNotification) name:@"ReloginSuccess" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveLoginFailureNotification:) name:DDNotificationUserLoginFailure object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveLoginNotification:) name:DDNotificationUserLoginSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickOffUser:) name:@"KickOffUser" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:DDNotificationLogout object:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title=@"消息";
+    [self initNotification];
+    
+    self.title=@"猪xx消息";
     self.navigationItem.title=@"TeamTalk";
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
     self.wantsFullScreenLayout=YES;
@@ -75,8 +90,7 @@
     self.tableView.contentOffset = CGPointMake(0, CGRectGetHeight(self.bar.bounds));
     [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     [self.tableView setBackgroundColor:RGB(239,239,244)];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"RefreshRecentData" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveReLoginSuccessNotification) name:@"ReloginSuccess" object:nil];
+
     self.lastMsgs = [NSMutableDictionary new];
     [[SessionModule sharedInstance] loadLocalSession:^(bool isok) {
         if (isok) {
@@ -99,7 +113,8 @@
     }];
     [SessionModule sharedInstance].delegate=self;
     [self addCustomSearchControll];
-  
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
 }
 
@@ -350,11 +365,11 @@
 }
 - (void)n_receiveStartLoginNotification:(NSNotification*)notification
 {
-     self.title = @"TeamTalk";
+     self.title = @"猪xx";
 }
 - (void)n_receiveLoginNotification:(NSNotification*)notification
 {
-    self.title = @"TeamTalk";
+    self.title = @"猪xxoo";
 
 }
 -(void)logout
@@ -365,19 +380,19 @@
 -(void)kickOffUser:(NSNotification*)notification
 {
     int type = [[notification object] intValue];
+    
     [[NSUserDefaults standardUserDefaults] setObject:@(false) forKey:@"autologin"];
-    LoginViewController *login = [LoginViewController new];
+    LoginViewController *login = TheAppDel.loginViewController;
     login.isRelogin=YES;
     
-    [self presentViewController:login animated:YES completion:^{
-        TheRuntime.user =nil;
-        TheRuntime.userID =nil;
-        [[DDTcpClientManager instance] disconnect];
-        [DDClientState shareInstance].userState = DDUserOffLineInitiative;
-        SCLAlertView *alert = [SCLAlertView new];
-        [alert showInfo:self title:@"注意" subTitle:@"你的账号在其他设备登陆了" closeButtonTitle:@"确定" duration:0];
-        
-    }];
+    TheAppDel.window.rootViewController = TheAppDel.loginViewController;
+    TheRuntime.user =nil;
+    TheRuntime.userID =nil;
+    [[DDTcpClientManager instance] disconnect];
+    [DDClientState shareInstance].userState = DDUserOffLineInitiative;
+    SCLAlertView *alert = [SCLAlertView new];
+    [alert showInfo:self title:@"注意" subTitle:@"你的账号在其他设备登陆了" closeButtonTitle:@"确定" duration:0];
+    
 }
 -(void)n_receiveReLoginSuccessNotification
 {
@@ -396,31 +411,31 @@
 -(void)preLoadMessage:(SessionEntity *)session
 {
    
-        [[DDDatabaseUtil instance] getLastestMessageForSessionID:session.sessionID completion:^(DDMessageEntity *message, NSError *error) {
-            if (message) {
-                if (message.msgID != session.lastMsgID ) {
-                    [[DDMessageModule shareInstance] getMessageFromServer:session.lastMsgID currentSession:session count:20 Block:^(NSMutableArray *array, NSError *error) {
-                        [[DDDatabaseUtil instance] insertMessages:array success:^{
-                            
-                        } failure:^(NSString *errorDescripe) {
-                            
-                        }];
+    [[DDDatabaseUtil instance] getLastestMessageForSessionID:session.sessionID completion:^(DDMessageEntity *message, NSError *error) {
+        if (message) {
+            if (message.msgID != session.lastMsgID ) {
+                [[DDMessageModule shareInstance] getMessageFromServer:session.lastMsgID currentSession:session count:20 Block:^(NSMutableArray *array, NSError *error) {
+                    [[DDDatabaseUtil instance] insertMessages:array success:^{
+                        
+                    } failure:^(NSString *errorDescripe) {
+                        
                     }];
-                }
-            }else{
-                if (session.lastMsgID !=0) {
-                    [[DDMessageModule shareInstance] getMessageFromServer:session.lastMsgID currentSession:session count:20 Block:^(NSMutableArray *array, NSError *error) {
-                        [[DDDatabaseUtil instance] insertMessages:array success:^{
-                            
-                        } failure:^(NSString *errorDescripe) {
-                            
-                        }];
-                    }];
-                }
-               
+                }];
             }
-            
-        }];
+        }else{
+            if (session.lastMsgID !=0) {
+                [[DDMessageModule shareInstance] getMessageFromServer:session.lastMsgID currentSession:session count:20 Block:^(NSMutableArray *array, NSError *error) {
+                    [[DDDatabaseUtil instance] insertMessages:array success:^{
+                        
+                    } failure:^(NSString *errorDescripe) {
+                        
+                    }];
+                }];
+            }
+           
+        }
+        
+    }];
     
 }
 

@@ -50,9 +50,9 @@ static NSInteger _upCount = 0;
     [super viewDidLoad];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"ipaddress"] == nil) {
-        [defaults setObject:@"http://access.teamtalk.im:8080/msg_server" forKey:@"ipaddress"];
-    }
+//    if ([defaults objectForKey:@"ipaddress"] == nil) {
+//        [defaults setObject:@"http://access.teamtalk.im:8080/msg_server" forKey:@"ipaddress"];
+//    }
     [defaults setObject:@"http://yogedan.com:8080/msg_server" forKey:@"ipaddress"];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"]!=nil) {
         _userNameTextField.text =[[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -192,7 +192,7 @@ static NSInteger _upCount = 0;
     [[LoginModule instance] loginWithUsername:userName password:password success:^(DDUserEntity *user) {
         
         [self.userLoginBtn setEnabled:YES];
-        [HUD removeFromSuperview];//luopeng 20150911
+        [HUD removeFromSuperview];//modmark
         
         if (user) {
             TheRuntime.user=user ;
@@ -206,11 +206,12 @@ static NSInteger _upCount = 0;
             }
             if (self.isRelogin) {
 //                [DDGroupModule instance];
-                TheAppDel.mainViewControll = [MainViewControll new];
+//                TheAppDel.mainViewControll = [MainViewControll new];
                 
             }
             [DDUtil viewRippleTransitionWithDuration:1.25 forView:TheAppDel.window trans:^{
-                [self presentViewController:TheAppDel.mainViewControll animated:YES completion:^{}];
+//                [self presentViewController:TheAppDel.mainViewControll animated:YES completion:^{}];
+                TheAppDel.window.rootViewController = TheAppDel.mainViewControll;
             }];
             
         }
@@ -253,7 +254,7 @@ static NSInteger _upCount = 0;
 
 - (IBAction)loginOrRegAction:(id)sender {
     
-    [DDUtil viewRippleTransitionWithDuration:1.25 forView:TheAppDel.window trans:^{
+    [DDUtil viewFlipTransitionWithDuration:1.25 style:@"right" forView:TheAppDel.window trans:^{
         TheAppDel.window.rootViewController = TheAppDel.regViewController;
     }];
     self.loginOrReg.selectedSegmentIndex = 0;

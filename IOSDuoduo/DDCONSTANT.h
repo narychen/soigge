@@ -22,7 +22,7 @@
 #define Is_CanSwitchServer          0
 #endif
 
-#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__) //luopeng 20150906
+#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__) //modmark
 //#define DDLog(xx, ...)                      NSLog(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #define DDLog(xx, ...)                      NSLog(@"\n%s:%d%s\n" xx @"\n\n", __FILENAME__, __LINE__, __PRETTY_FUNCTION__, ##__VA_ARGS__)
 

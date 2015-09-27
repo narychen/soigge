@@ -71,6 +71,8 @@ BOOL LoginCmdIDIsValidValue(LoginCmdID value) {
     case LoginCmdIDCidLoginResDevicetoken:
     case LoginCmdIDCidLoginReqKickpcclient:
     case LoginCmdIDCidLoginResKickpcclient:
+    case LoginCmdIDCidLoginReqUserreg:
+    case LoginCmdIDCidLoginResUserreg:
       return YES;
     default:
       return NO;
@@ -100,6 +102,10 @@ NSString *NSStringFromLoginCmdID(LoginCmdID value) {
       return @"LoginCmdIDCidLoginReqKickpcclient";
     case LoginCmdIDCidLoginResKickpcclient:
       return @"LoginCmdIDCidLoginResKickpcclient";
+    case LoginCmdIDCidLoginReqUserreg:
+      return @"LoginCmdIDCidLoginReqUserreg";
+    case LoginCmdIDCidLoginResUserreg:
+      return @"LoginCmdIDCidLoginResUserreg";
     default:
       return nil;
   }
@@ -363,6 +369,8 @@ BOOL OtherCmdIDIsValidValue(OtherCmdID value) {
     case OtherCmdIDCidOtherFileTransferRsp:
     case OtherCmdIDCidOtherFileServerIpReq:
     case OtherCmdIDCidOtherFileServerIpRsp:
+    case OtherCmdIDCidOtherDbRegisterReq:
+    case OtherCmdIDCidOtherDbRegisterRes:
       return YES;
     default:
       return NO;
@@ -412,6 +420,10 @@ NSString *NSStringFromOtherCmdID(OtherCmdID value) {
       return @"OtherCmdIDCidOtherFileServerIpReq";
     case OtherCmdIDCidOtherFileServerIpRsp:
       return @"OtherCmdIDCidOtherFileServerIpRsp";
+    case OtherCmdIDCidOtherDbRegisterReq:
+      return @"OtherCmdIDCidOtherDbRegisterReq";
+    case OtherCmdIDCidOtherDbRegisterRes:
+      return @"OtherCmdIDCidOtherDbRegisterRes";
     default:
       return nil;
   }
@@ -1166,36 +1178,6 @@ static UserInfo* defaultUserInfoInstance = nil;
   return defaultUserInfoInstance;
 }
 - (BOOL) isInitialized {
-  if (!self.hasUserId) {
-    return NO;
-  }
-  if (!self.hasUserGender) {
-    return NO;
-  }
-  if (!self.hasUserNickName) {
-    return NO;
-  }
-  if (!self.hasAvatarUrl) {
-    return NO;
-  }
-  if (!self.hasDepartmentId) {
-    return NO;
-  }
-  if (!self.hasEmail) {
-    return NO;
-  }
-  if (!self.hasUserRealName) {
-    return NO;
-  }
-  if (!self.hasUserTel) {
-    return NO;
-  }
-  if (!self.hasUserDomain) {
-    return NO;
-  }
-  if (!self.hasStatus) {
-    return NO;
-  }
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {

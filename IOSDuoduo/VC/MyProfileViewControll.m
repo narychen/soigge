@@ -19,6 +19,7 @@
 #import "DDDatabaseUtil.h"
 #import "NSString+Additions.h"
 #import "DDUtil.h"
+
 @interface MyProfileViewControll ()
 
 @end
@@ -137,23 +138,23 @@
         }];
         [DDNotificationHelp postNotification:DDNotificationLogout userInfo:nil object:nil];
 //        LoginViewController *login = [LoginViewController new];
-        LoginViewController *login = TheAppDel.loginViewController; //luopeng 20150911
+        LoginViewController *login = TheAppDel.loginViewController; 
         login.isRelogin=YES;
-//        [self presentViewController:login animated:YES completion:^{
-//            TheRuntime.user =nil;
-//            TheRuntime.userID =nil;
-//            [DDClientState shareInstance].userState = DDUserOffLineInitiative;
-//            [[DDTcpClientManager instance] disconnect];
-//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autologin"];
-//        }];
+
         [DDUtil viewRippleTransitionWithDuration:1.25 forView:TheAppDel.window trans:^{
-            [TheAppDel.mainViewControll dismissViewControllerAnimated:YES completion:^{
-                TheRuntime.user =nil;
-                TheRuntime.userID =nil;
-                [DDClientState shareInstance].userState = DDUserOffLineInitiative;
-                [[DDTcpClientManager instance] disconnect];
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autologin"];
-            }];
+//            [TheAppDel.mainViewControll dismissViewControllerAnimated:YES completion:^{
+//                TheRuntime.user =nil;
+//                TheRuntime.userID =nil;
+//                [DDClientState shareInstance].userState = DDUserOffLineInitiative;
+//                [[DDTcpClientManager instance] disconnect];
+//                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autologin"];
+//            }];
+            TheRuntime.user =nil;
+            TheRuntime.userID =nil;
+            [DDClientState shareInstance].userState = DDUserOffLineInitiative;
+            [[DDTcpClientManager instance] disconnect];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autologin"];
+            TheAppDel.window.rootViewController = TheAppDel.loginViewController;
         }];
 
     }];

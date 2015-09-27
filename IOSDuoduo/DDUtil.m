@@ -13,12 +13,19 @@
     int _privateNum;
 }
 
-+ (void)viewFlipTransitionWithDuration:(NSTimeInterval)duration forView:(UIView*)view trans:(void(^)(void))trans
++ (void)viewFlipTransitionWithDuration:(NSTimeInterval)duration style:(NSString*)style forView:(UIView*)view trans:(void(^)(void))trans
 {
     [UIView beginAnimations:@"View Flip" context:nil];
     [UIView setAnimationDuration:duration];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationTransition: UIViewAnimationTransitionFlipFromRight forView:view cache:YES];
+    if ([style  isEqual: @"left"]) {
+        [UIView setAnimationTransition: UIViewAnimationTransitionFlipFromRight forView:view cache:YES];
+    } else if ([style isEqual:@"right"]) {
+        [UIView setAnimationTransition: UIViewAnimationTransitionFlipFromLeft forView:view cache:YES];
+    } else {
+        [UIView setAnimationTransition: UIViewAnimationTransitionFlipFromRight forView:view cache:YES];
+    }
+    
     trans();
     [UIView commitAnimations];
 }
@@ -33,6 +40,7 @@
     trans();
     [[view layer] addAnimation:animation forKey:@"animation"];
 }
+
 
 + (void)showMessage:(NSString *)message
 {

@@ -389,7 +389,7 @@
             DDUserEntity *user = [userArray objectAtIndex:indexPath.row];
      
 //            [cell setCellContent:[user getAvatarUrl] Name:user.nick Cname:user.name];
-            [cell setCellContent:[user getAvatarUrl] Name:user.name Cname:user.name];//luopeng 20150904
+            [cell setCellContent:[user getAvatarUrl] Name:user.name Cname:user.name];//modmark
             cell.button.tag=indexPath.row;
             [cell.button setTitle:keyStr forState:UIControlStateNormal];
             [cell.button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
@@ -401,7 +401,7 @@
         NSArray *userArray =[self.department objectForKey:keyStr];
         DDUserEntity *user = [userArray objectAtIndex:indexPath.row];
     //            [cell setCellContent:[user getAvatarUrl] Name:user.nick Cname:user.name];
-        [cell setCellContent:[user getAvatarUrl] Name:user.name Cname:user.name]; //luopeng 20150904
+        [cell setCellContent:[user getAvatarUrl] Name:user.name Cname:user.name]; //modmark
         cell.button.tag=indexPath.row;
         [cell.button setTitle:keyStr forState:UIControlStateNormal];
         [cell.button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];

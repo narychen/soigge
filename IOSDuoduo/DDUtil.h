@@ -13,8 +13,7 @@
 
 @interface DDUtil : NSObject
 
-+ (void)viewFlipTransitionWithDuration:(NSTimeInterval)duration forView:(UIView*)view trans:(void(^)(void))trans;
-
++ (void)viewFlipTransitionWithDuration:(NSTimeInterval)duration style:(NSString*)style forView:(UIView*)view trans:(void(^)(void))trans;
 + (void)viewRippleTransitionWithDuration:(NSTimeInterval)duration forView:(UIView*)view trans:(void(^)(void))trans;
 
 + (void)showMessage:(NSString *)message;

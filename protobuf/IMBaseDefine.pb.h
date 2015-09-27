@@ -60,6 +60,8 @@ typedef NS_ENUM(SInt32, LoginCmdID) {
   LoginCmdIDCidLoginResDevicetoken = 265,
   LoginCmdIDCidLoginReqKickpcclient = 266,
   LoginCmdIDCidLoginResKickpcclient = 267,
+  LoginCmdIDCidLoginReqUserreg = 268,
+  LoginCmdIDCidLoginResUserreg = 269,
 };
 
 BOOL LoginCmdIDIsValidValue(LoginCmdID value);
@@ -172,6 +174,8 @@ typedef NS_ENUM(SInt32, OtherCmdID) {
   OtherCmdIDCidOtherFileTransferRsp = 1842,
   OtherCmdIDCidOtherFileServerIpReq = 1843,
   OtherCmdIDCidOtherFileServerIpRsp = 1844,
+  OtherCmdIDCidOtherDbRegisterReq = 1845,
+  OtherCmdIDCidOtherDbRegisterRes = 1846,
 };
 
 BOOL OtherCmdIDIsValidValue(OtherCmdID value);

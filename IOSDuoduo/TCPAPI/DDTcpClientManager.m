@@ -22,7 +22,7 @@
 - (void)p_handleEventEndEncounteredStream:(NSStream *)aStream;
 - (void)p_handleEventHasBytesAvailableStream:(NSStream *)aStream;
 - (void)p_handleEventHasSpaceAvailableStream:(NSStream *)aStream;
-- (BOOL)p_checkSendBuffer:(DDSendBuffer*)sendBuffer Length:(NSInteger)len; //luopeng 20150905
+- (BOOL)p_checkSendBuffer:(DDSendBuffer*)sendBuffer Length:(NSInteger)len; //modmark
 @end
 
 @implementation DDTcpClientManager
@@ -111,7 +111,7 @@
             if (len < [data length]) {
                 DDLog(@"WRITE - Creating a new buffer for remaining data len:%lu", (unsigned long)rlen);
 //                _lastSendBuffer = [DDSendBuffer dataWithNSData:[data subdataWithRange:NSMakeRange([data length]-len, [data length])]];     //fix tt bug
-                _lastSendBuffer = [DDSendBuffer dataWithNSData:[data subdataWithRange:NSMakeRange(len, [data length]-len)]]; //luopeng 20150904
+                _lastSendBuffer = [DDSendBuffer dataWithNSData:[data subdataWithRange:NSMakeRange(len, [data length]-len)]]; //modmark
                 [_sendBuffers addObject:_lastSendBuffer];
                 
             }
@@ -124,7 +124,7 @@
             lastSendBufferLength = [_lastSendBuffer length];
             newDataLength = [data length];
             //if (lastSendBufferLength<1024) {
-            if (lastSendBufferLength + newDataLength) { //luopeng 20150904
+            if (lastSendBufferLength + newDataLength) { //modmark
                 DDLog(@"WRITE - Have a buffer with enough space, appending data to it");
                 [_lastSendBuffer appendData:data];
                 return;
@@ -177,7 +177,7 @@
     }
 }
 
-//luopeng 20150905
+
 - (BOOL)p_checkSendBuffer:(DDSendBuffer*)sendBuffer Length:(NSInteger)len
 {
     if (!len) {

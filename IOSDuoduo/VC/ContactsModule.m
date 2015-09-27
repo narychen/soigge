@@ -47,10 +47,15 @@
 -(NSMutableDictionary *)sortByContactFirstLetter
 {
     NSMutableDictionary *dic = [NSMutableDictionary new];
+    NSString* fl;
     for (DDUserEntity * user in [[DDUserModule shareInstance] getAllMaintanceUser]) {
         
 //        NSString *fl = [user.pyname substringWithRange:NSMakeRange(0, 1)];
-        NSString *fl = [user.name substringWithRange:NSMakeRange(0, 1)]; //luopeng 20150904
+        if ([user.name length] > 0) {
+            fl = [user.name substringWithRange:NSMakeRange(0, 1)]; //modmark
+        } else {
+            fl = @"~";
+        }
         if ([dic safeObjectForKey:fl]) {
             NSMutableArray *arr = [dic safeObjectForKey:fl];
             [arr addObject:user];

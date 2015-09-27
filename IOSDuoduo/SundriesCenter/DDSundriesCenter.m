@@ -25,7 +25,7 @@
     if (self)
     {
 //        _serialQueue = dispatch_queue_create("com.mogujie.SundriesSerial", NULL);
-        _serialQueue = dispatch_queue_create("com.mogujie.SundriesSerial", DISPATCH_QUEUE_SERIAL); //luopeng 20150906
+        _serialQueue = dispatch_queue_create("com.mogujie.SundriesSerial", DISPATCH_QUEUE_SERIAL); //modmark
         
         
 //        _parallelQueue = dispatch_queue_create("com.mogujie.SundriesParallel", NULL);

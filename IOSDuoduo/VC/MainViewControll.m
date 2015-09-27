@@ -42,7 +42,7 @@
 
     UIImage* conversationSelected = [[UIImage imageNamed:@"conversation_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
    
-    self.nv1.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"消息" image:[UIImage imageNamed:@"conversation"] selectedImage:conversationSelected];
+    self.nv1.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"猪xx" image:[UIImage imageNamed:@"conversation"] selectedImage:conversationSelected];
     self.nv1.tabBarItem.tag=0;//26 140 242
     [self.nv1.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:RGB(26, 140, 242) forKey:UITextAttributeTextColor] forState:UIControlStateSelected];
     
@@ -112,8 +112,31 @@
         }
         
     }else{
-    self.clickCount=0;
+        self.clickCount=0;
     }
 }
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    
+    NSArray *tabViewControllers = tabBarController.viewControllers;
+    UIView * fromView = tabBarController.selectedViewController.view;
+    UIView * toView = viewController.view;
+    if (fromView == toView)
+        return false;
+    NSUInteger fromIndex = [tabViewControllers indexOfObject:tabBarController.selectedViewController];
+    NSUInteger toIndex = [tabViewControllers indexOfObject:viewController];
+    
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:0.3
+                       options: toIndex > fromIndex ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            tabBarController.selectedIndex = toIndex;
+                        }
+                    }];
+    return true;
+}
+
 
 @end

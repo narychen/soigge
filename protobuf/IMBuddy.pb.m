@@ -1283,14 +1283,6 @@ static IMUsersInfoRsp* defaultIMUsersInfoRspInstance = nil;
   if (!self.hasUserId) {
     return NO;
   }
-  __block BOOL isInituserInfoList = YES;
-   [self.userInfoList enumerateObjectsUsingBlock:^(UserInfo *element, NSUInteger idx, BOOL *stop) {
-    if (!element.isInitialized) {
-      isInituserInfoList = NO;
-      *stop = YES;
-    }
-  }];
-  if (!isInituserInfoList) return isInituserInfoList;
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
@@ -2721,14 +2713,6 @@ static IMAllUserRsp* defaultIMAllUserRspInstance = nil;
   if (!self.hasLatestUpdateTime) {
     return NO;
   }
-  __block BOOL isInituserList = YES;
-   [self.userList enumerateObjectsUsingBlock:^(UserInfo *element, NSUInteger idx, BOOL *stop) {
-    if (!element.isInitialized) {
-      isInituserList = NO;
-      *stop = YES;
-    }
-  }];
-  if (!isInituserList) return isInituserList;
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {

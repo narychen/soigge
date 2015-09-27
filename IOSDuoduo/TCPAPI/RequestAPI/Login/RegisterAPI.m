@@ -1,19 +1,18 @@
 //
-//  DDLoginAPI.m
-//  Duoduo
+//  RegisterAPI.m
+//  TeamTalk
 //
-//  Created by 独嘉 on 14-5-6.
-//  Copyright (c) 2014年 zuoye. All rights reserved.
+//  Created by nary on 15/9/13.
+//  Copyright (c) 2015年 Michael Hu. All rights reserved.
 //
 
-#import "LoginAPI.h"
-#import "DDUserEntity.h"
+
+#import "RegisterAPI.h"
 #import "IMLogin.pb.h"
-#import "IMBaseDefine.pb.h"
-#import "DDUserEntity.h"
 #import "NSString+Additions.h"
-#import "security.h"
-@implementation LoginAPI
+
+@implementation RegisterAPI
+
 /**
  *  请求超时时间
  *
@@ -31,7 +30,7 @@
  */
 - (int)requestServiceID
 {
-    return DDSERVICE_LOGIN;
+    return ServiceIDSidLogin;
 }
 
 /**
@@ -41,7 +40,7 @@
  */
 - (int)responseServiceID
 {
-    return DDSERVICE_LOGIN;
+    return ServiceIDSidLogin;
 }
 
 /**
@@ -51,7 +50,7 @@
  */
 - (int)requestCommendID
 {
-    return DDCMD_LOGIN_REQ_USERLOGIN;
+    return LoginCmdIDCidLoginReqUserreg;
 }
 
 /**
@@ -61,7 +60,7 @@
  */
 - (int)responseCommendID
 {
-    return DDCMD_LOGIN_RES_USERLOGIN;
+    return LoginCmdIDCidLoginResUserreg;
 }
 
 /**
@@ -73,12 +72,13 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMLoginRes *res = [IMLoginRes parseFromData:data];
+        IMRegisterRes *res = [IMRegisterRes parseFromData:data];
         NSInteger serverTime = res.serverTime;
         NSInteger loginResult = res.resultCode;
-        NSString *resultString=nil;
-        resultString = res.resultString;
+        NSString *resultString = res.resultString;
+        
         NSDictionary* result = nil;
+        
         if (loginResult !=0) {
             return result;
         } else {
@@ -90,8 +90,8 @@
             };
             return result;
         }
-        
     };
+    
     return analysis;
 }
 
@@ -102,30 +102,45 @@
  */
 - (Package)packageRequestObject
 {
-    Package package = (id)^(id object, uint32_t seqNo)
+    Package package = (id)^(id object,UInt32 seqNo)
     {
         NSDictionary* info = [[NSBundle mainBundle] infoDictionary];
         NSString *clientVersion = [NSString stringWithFormat:@"MAC/%@-%@", info[@"CFBundleShortVersionString"],info[@"CFBundleVersion"] ];
         
-        NSString * strMsg = object[1];
+        NSDictionary* _ = (NSDictionary*)object;
+        
         DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
-        [dataout writeTcpProtocolHeader:DDSERVICE_LOGIN
-                                    cId:DDCMD_LOGIN_REQ_USERLOGIN
+        [dataout writeTcpProtocolHeader:ServiceIDSidLogin
+                                    cId:LoginCmdIDCidLoginReqUserreg
                                   seqNo:seqNo];
+        
+        IMRegisterReqBuilder *reg = [IMRegisterReq builder];
+        UserInfoBuilder *userInfo = [UserInfo builder];
+        
+        [reg setUserName:_[@"name"]];
+        [reg setPassword:[_[@"password"] MD5]];
 
-        IMLoginReqBuilder *login = [IMLoginReq builder];
-        [login setUserName:object[0]];
-        [login setPassword:[strMsg MD5]];
-        NSString* md5passwd = [login password];
-        DDLog(@"md5 password is %@", md5passwd);
-        [login setClientType:ClientTypeClientTypeIos];
-        [login setClientVersion:clientVersion];
-        [login setOnlineStatus:UserStatTypeUserStatusOnline];
-        [dataout directWriteBytes:[login build].data];
+        [reg setClientType:ClientTypeClientTypeIos];
+        [reg setClientVersion:clientVersion];
+        [reg setOnlineStatus:UserStatTypeUserStatusOnline];
+        
+        [userInfo setDepartmentId:(UInt32)[_[@"department"] intValue]];
+        [userInfo setEmail:(NSString*)_[@"email"]];
+        [userInfo setAvatarUrl:(NSString*)_[@"avatar"]];
+        [userInfo setUserDomain:(NSString*)_[@"domain"]];
+        [userInfo setUserGender:(UInt32)[_[@"gender"] intValue]];
+        [userInfo setUserNickName:(NSString*)_[@"nickname"]];
+        [userInfo setUserRealName:(NSString*)_[@"realname"]];
+        [userInfo setUserTel:(NSString*)_[@"tel"]];
+        
+        [reg setUserInfo:[userInfo build]];
+        
+        [dataout directWriteBytes:[reg build].data];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };
     return package;
 }
+
 @end

@@ -61,6 +61,17 @@
     return self;
 }
 
+- (void)setLastLoginUserName:(NSString*)name {
+    _lastLoginUserName = name;
+}
+
+- (void)setLastLoginPassword:(NSString*)password {
+    _lastLoginPassword = password;
+}
+
+- (void)setRelogining:(BOOL)relogin {
+    _relogining = relogin;
+}
 
 #pragma mark Public API
 - (void)loginWithUsername:(NSString*)name password:(NSString*)password success:(void(^)(DDUserEntity* loginedUser))success failure:(void(^)(NSString* error))failure
@@ -93,7 +104,7 @@
                         
                     }];
                     success(user);
-                     [DDNotificationHelp postNotification:DDNotificationUserLoginSuccess userInfo:nil object:user];
+                    [DDNotificationHelp postNotification:DDNotificationUserLoginSuccess userInfo:nil object:user];
                 } failure:^(id object) {
                     DDLog(@"login#登录验证失败");
                     failure(@"登录验证失败");

@@ -27,6 +27,7 @@
 		4503E2471B402486005A906A /* IMOther.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4503E2361B402486005A906A /* IMOther.pb.m */; };
 		4503E24A1B402EA4005A906A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4503E2491B402EA4005A906A /* Podfile */; };
 		4503E24C1B40395B005A906A /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 4503E24B1B40395B005A906A /* Podfile.lock */; };
+		45F5830F1BA564AC00F09574 /* RegisterAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F5830E1BA564AC00F09574 /* RegisterAPI.m */; };
 		45FA11FD1BA3D028004C7086 /* DDUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA11FC1BA3D028004C7086 /* DDUtil.m */; };
 		45FA12011BA3FFE8004C7086 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA11FF1BA3FFE8004C7086 /* RegViewController.m */; };
 		45FA12021BA3FFE8004C7086 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FA12001BA3FFE8004C7086 /* RegViewController.xib */; };
@@ -428,6 +429,8 @@
 		4503E2491B402EA4005A906A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4503E24B1B40395B005A906A /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		4508BF891B88850F00C15531 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		45F5830D1BA5646F00F09574 /* RegisterAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterAPI.h; sourceTree = "<group>"; };
+		45F5830E1BA564AC00F09574 /* RegisterAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterAPI.m; sourceTree = "<group>"; };
 		45FA11FB1BA3D00A004C7086 /* DDUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDUtil.h; sourceTree = "<group>"; };
 		45FA11FC1BA3D028004C7086 /* DDUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDUtil.m; sourceTree = "<group>"; };
 		45FA11FE1BA3FFE8004C7086 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
@@ -672,8 +675,8 @@
 		4CB23CAE19B4590D004FCF10 /* EditGroupViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGroupViewCell.m; sourceTree = "<group>"; };
 		4CB3D91819F4A22800DC9B9D /* ShieldGroupMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShieldGroupMessageAPI.h; sourceTree = "<group>"; };
 		4CB3D91919F4A22800DC9B9D /* ShieldGroupMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShieldGroupMessageAPI.m; sourceTree = "<group>"; };
-		4CB3D91B19F4B48200DC9B9D /* LogoutAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutAPI.h; sourceTree = "<group>"; };
-		4CB3D91C19F4B48200DC9B9D /* LogoutAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutAPI.m; sourceTree = "<group>"; };
+		4CB3D91B19F4B48200DC9B9D /* LogoutAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoutAPI.h; path = ../../LogoutAPI.h; sourceTree = "<group>"; };
+		4CB3D91C19F4B48200DC9B9D /* LogoutAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoutAPI.m; path = ../../LogoutAPI.m; sourceTree = "<group>"; };
 		4CB3D91E19F4FA7F00DC9B9D /* SearchContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContentViewController.h; sourceTree = "<group>"; };
 		4CB3D91F19F4FA7F00DC9B9D /* SearchContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContentViewController.m; sourceTree = "<group>"; };
 		4CB58EAA1991FF98006B24D3 /* DDepartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDepartment.h; path = ../TCPAPI/DDepartment.h; sourceTree = "<group>"; };
@@ -1616,8 +1619,6 @@
 				4CC35AAB1A83585E00E6224D /* GetMsgByMsgIDsAPI.m */,
 				C493DE7A1962A50900B39106 /* RequestAPI */,
 				C493DE991962A50900B39106 /* UnrequestAPI */,
-				4CB3D91B19F4B48200DC9B9D /* LogoutAPI.h */,
-				4CB3D91C19F4B48200DC9B9D /* LogoutAPI.m */,
 			);
 			path = TCPAPI;
 			sourceTree = "<group>";
@@ -1634,10 +1635,14 @@
 		C493DE7E1962A50900B39106 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				4CB3D91B19F4B48200DC9B9D /* LogoutAPI.h */,
+				4CB3D91C19F4B48200DC9B9D /* LogoutAPI.m */,
 				C493DE7F1962A50900B39106 /* HeartbeatAPI.h */,
 				C493DE801962A50900B39106 /* HeartbeatAPI.m */,
 				C493DE811962A50900B39106 /* LoginAPI.h */,
 				C493DE821962A50900B39106 /* LoginAPI.mm */,
+				45F5830D1BA5646F00F09574 /* RegisterAPI.h */,
+				45F5830E1BA564AC00F09574 /* RegisterAPI.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2576,6 +2581,7 @@
 				4503E2441B402486005A906A /* IMGroup.pb.m in Sources */,
 				C493E05F1962A50A00B39106 /* ChattingMainViewController.m in Sources */,
 				4C1CEEC81A3581160015C355 /* GetMessageQueueAPI.m in Sources */,
+				45F5830F1BA564AC00F09574 /* RegisterAPI.m in Sources */,
 				4C0C0F0C1A314E060094CCD2 /* SessionModule.m in Sources */,
 				4CD995F5199F420700025C9C /* DDBaseEntity.m in Sources */,
 				4C1E441919961889005CB2DB /* DDReceiveMessageACKAPI.m in Sources */,

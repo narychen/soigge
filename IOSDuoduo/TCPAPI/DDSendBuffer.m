@@ -42,7 +42,7 @@
 - (NSUInteger)length
 {
 	return [embeddedData length];
-//    return [embeddedData length] - sendPos; //luopeng 20150904
+//    return [embeddedData length] - sendPos; //modmark
 }
 
 - (void *)mutableBytes

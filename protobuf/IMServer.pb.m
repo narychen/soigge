@@ -614,11 +614,6 @@ static IMValidateRsp* defaultIMValidateRspInstance = nil;
   if (!self.hasResultCode) {
     return NO;
   }
-  if (self.hasUserInfo) {
-    if (!self.userInfo.isInitialized) {
-      return NO;
-    }
-  }
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
